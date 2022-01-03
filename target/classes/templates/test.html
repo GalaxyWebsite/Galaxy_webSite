@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div th:each="task:${user.getTasks().get(0)}">
+    <h4><span th:text="${task.getBody()}"></span></h4>
+</div>
+</body>
+</html>

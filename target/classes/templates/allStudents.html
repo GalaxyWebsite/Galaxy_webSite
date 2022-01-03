@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>All Students</title>
+</head>
+<body>
+<div class="students" th:each="student : ${students}">
+    <div class="singlePost">
+        <!--        <h4><span th:text="${student.getFirstName()}+' '+${student.getLastName()}"/></h4>-->
+                <h4><a th:href="'/studentId/'+${student.getId()}"><span th:text="${student.getName()}"/></a></h4>
+    </div>
+</div>
+
+
+</body>
+</html>
