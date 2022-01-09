@@ -20,6 +20,7 @@ public class User {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
+
     @Column(nullable = false)
     @NotEmpty()
     private String name;
@@ -49,12 +50,24 @@ public class User {
     )
     private List <Role> roles;
 
+    @ManyToOne
+    private  Groups groups ;
+
+    @OneToMany(mappedBy = "user")
+    private List<Courses> courses;
+
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Tasks> tasks;
+    public List<Tasks> tasks;
+
+    @OneToMany(mappedBy = "student", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    public List<TaskDelivery> taskDeliveries;
 
     public List<Tasks> getTasks() {
         return tasks;
     }
+
+      @OneToMany(mappedBy = "user")
+    private List<Grade> grades;
 
     public void setTasks(List<Tasks> tasks) {
         this.tasks = tasks;
@@ -72,8 +85,9 @@ public class User {
 
     }
     
-    /* @OneToMany(mappedBy = "users")
-    private List<Message> messages; */
+     @OneToMany(mappedBy = "user")
+    private List<Message> messages;
+
     /**
      * @return Integer return the id
      */

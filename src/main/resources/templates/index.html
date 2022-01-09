@@ -1,21 +1,83 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" 
-   xmlns:th="http://www.thymeleaf.org"
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-   xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
-      layout:decorator="layout">
-      
-      <head>
-        <title>Home</title>
-    </head>
-    <body>
-     <div layout:fragment="content">
-     
-       <p sec:authorize="isAnonymous()"><a th:href="@{/login}">Login</a></p>
-          <p><a th:href="@{/home}">User Home</a></p>
-       <p><a th:href="@{/admin/home}">Admin Home</a></p>
-       <p sec:authorize="isAuthenticated()"><a th:href="@{/logout}">Logout</a></p>
-       <p sec:authorize="isAnonymous()"><a th:href="@{/registration}">Register user</a></p>
-     </div>
-    </body>
+   xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3" layout:decorator="layout">
+
+<head>
+   <link rel="stylesheet" type="text/css" href="assets/css/styles.css">
+   <title>Home</title>
+   <script type="text/javascript" src="script.js"></script>
+   <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
+   <script>
+      $(window).on('scroll', function () {
+         if ($(window).scrollTop()) {
+            $('nav').addClass('black');
+         } else {
+            $('nav').removeClass('black');
+         }
+      })
+   </script>
+</head>
+
+<body>
+ 
+
+   <!-- Navigation Bar -->
+   <header layout:fragment="contentt" id="header" style="height: 70vh;">
+      <nav>
+         <div class="logo"><img src="assets/images/icon/logo.jpg" alt="logo"></div>
+         <ul>
+            <li><p><a th:href="@{/home}">User Home</a></p></li>
+            <li> <p><a th:href="@{/admin/home}">Admin Home</a></p></li>
+            <li><p sec:authorize="isAuthenticated()"><a th:href="@{/logout}">Logout</a></p></li>
+            <li><p sec:authorize="isAnonymous()"><a th:href="@{/registration}">Register user</a></p></li>
+         </ul>
+         <div class="srch"><input type="text" class="search" placeholder="Search here..."><img
+               src="assets/images/icon/search.png" alt="search" onclick=slide()></div>
+               <p sec:authorize="isAnonymous()"><a class="get-started" th:href="@{/login}">Login</a></p>
+         <img src="assets/images/icon/menu.png" class="menu" onclick="sideMenu(0)" alt="menu">
+      </nav>
+      <div class="head-containerr">
+         <div class="quote">
+            <p>Education is the passport to the future, for tomorrow belongs to those who prepare for it today.</p>
+            <h5>Education is the process of facilitating learning, or the acquisition of knowledge, skills, values,
+               beliefs, and habits. Educational methods include teaching, training, storytelling, discussion and
+               directed research!</h5>
+         </div>
+         <div class="svg-image">
+            <img src="assets/images/icon/software-development-background.jpg" alt="svg">
+         </div>
+      </div>
+    
+   </header>
+<!-- FOOTER -->
+<footer>
+   <div class="footer-container">
+      <div class="left-col">
+         <img src="assets/images/icon/logo.jpg" style="width: 200px;">
+         <div class="logo"></div>
+         <div class="social-media">
+            <a href="#"><img src="assets/images/icon/fb.png"></a>
+            <a href="#"><img src="assets/images/icon/insta.png"></a>
+            <a href="#"><img src="assets/images/icon/tt.png"></a>
+            <a href="#"><img src="assets/images/icon/ytube.png"></a>
+            <a href="#"><img src="assets/images/icon/linkedin.png"></a>
+         </div><br><br>
+         <p class="rights-text">Copyright © 2022</p>
+         <p><img src="assets/images/icon/phone.png"> +962000000<br><img src="assets/images/icon/mail.png">&nbsp; xxxx@gmail.com</p>
+      </div>
+      <div class="right-col">
+         <h1 style="color: #fff">Our Newsletter</h1>
+         <div class="border"></div><br>
+         <p>Enter Your Email to get our News and updates.</p>
+         <form class="newsletter-form">
+            <input class="txtb" type="email" placeholder="Enter Your Email">
+            <input class="btn" type="submit" value="Submit">
+         </form>
+      </div>
+   </div>
+</footer>
+
+</body>
+
 </html>

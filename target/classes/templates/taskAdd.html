@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html layout:decorator="layout">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
@@ -8,17 +8,46 @@
     <title>Document</title>
 </head>
 <body>
-<form  action="/AddTask" method="post">
-    </ul>
-    <input  placeholder="What's in your mind?" id="body" name="body">
-    <label for="dueDate">when's the due date?</label>
-    <input  type="date"  id="dueDate" name="dueDate">
-    <label for="dueDate">when's the deadline?</label>
-    <input  type="date"  id="deadLine" name="deadLine">
+<div layout:fragment="content">
 
-            <button type="submit" class='btn btn-primary btn-xs'>Add Task</button>
+    <form  action="/AddTask" method="post">
+        </ul>
+        <input  placeholder="What's in your mind?" id="body" name="body">
+        <label for="title">What's your task title?</label>
+        <input  placeholder="What's your task title?" id="title" name="title">
+        <label for="dueDate">when's the due date?</label>
+        <input  type="date"  id="dueDate" name="dueDate">
+        <label for="dueDate">when's the deadline?</label>
+        <input  type="date"  id="deadLine" name="deadLine">
+        <br>
+        <select name="courseId" id="courseId">
+            <div th:each="cor : ${course}">
+                <option th:value="${cor.getId()}"><span th:text="${cor.getSubject()}"></span></option></div>
+        </select>
+
+        <button type="submit" class='btn btn-primary btn-xs'>Add Task</button>
         </li>
-    </ul>
-</form>
+        </ul>
+    </form>
+
+    <br>
+    <br>
+    <br>
+    <br>
+    <form  action="/AddCourse" method="post">
+        </ul>
+        <label for="title">What's your course title?</label>
+        <input  placeholder="What's your task title?" id="subject" name="subject">
+        <div class="students" th:each="student : ${students}">
+        <input type="checkbox" id="vehicle1" name="names" th:value="${student.getId()}">
+        <label for="vehicle1"> <span th:text="${student.getName()}"/></label><br>
+        </div>
+
+
+        <button type="submit" class='btn btn-primary btn-xs'>Add Cource</button>
+        </li>
+        </ul>
+    </form>
+</div>
 </body>
 </html>

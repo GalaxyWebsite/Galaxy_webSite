@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html layout:decorator="layout">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
@@ -8,13 +8,32 @@
     <title>All Students</title>
 </head>
 <body>
-<div class="students" th:each="student : ${students}">
+<div layout:fragment="content">
+<table style="border: solid 2px black;
+width: 1000px;
+height: auto;
+margin-bottom: 200px;">
+    <tr>
+        <th>student name </th>
+        <th>Grade</th>
+        <th></th>
+    </tr>
+    <div class="students" th:each="student : ${students}">
     <div class="singlePost">
+    <tr>
+        <td>
+        <p><a th:href="'/DMQRzZWMDdGQtbndzBHNsawN0aXRsZQR0ZXN0AzcwMQR3b2UDMjQwMjEwNQ/331134333'+${student.getId()+'31134333'}"><span th:text="${student.getName()}"/></a></p>
+        </td>
+       <td> 90</td>
+        <td></td>
+    </tr>
+</table>
+
         <!--        <h4><span th:text="${student.getFirstName()}+' '+${student.getLastName()}"/></h4>-->
-                <h4><a th:href="'/studentId/'+${student.getId()}"><span th:text="${student.getName()}"/></a></h4>
     </div>
+
 </div>
 
-
+</div>
 </body>
 </html>

@@ -26,7 +26,12 @@ public class Message {
 
     @ManyToOne
     @JoinColumn(name = "user_id",nullable = false)
-    private User user;    
+    private User user;
+
+    @ManyToOne
+    @JoinColumn(name = "post_id",nullable = false)
+    private Tasks messageTask;
+    public Message(){}
 
     public User getUser() {
         return this.user;
@@ -34,6 +39,14 @@ public class Message {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public Tasks getMessageTask() {
+        return messageTask;
+    }
+
+    public void setMessageTask(Tasks messageTask) {
+        this.messageTask = messageTask;
     }
 
     /**

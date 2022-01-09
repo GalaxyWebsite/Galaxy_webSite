@@ -25,9 +25,17 @@
 --INSERT INTO users (id, email, password, name,phone_number,gender) VALUES
 --(1, 'admin@gmail.com', '$2a$10$hKDVYxLefVHV/vtuPhWD3OigtRyOykRLDdUAp80Z1crSoS1lFqaFS', 'Admin','0782602874','male'),
 --(3, 'user@gmail.com', '$2a$10$ByIUiNaRfBKSV6urZoBBxe4UbJ/sS6u1ZaPORHF9AtNWAuVPVz1by', 'User','0782602874','male');
+--(2, 'user@gmail.', '$2a$10$ByIUiNaRfBKSV6urZoBBxe4UbJ/sS6u1ZaPORHF9AtNWAuVPVz1by', 'User1','0782602874','male');
+--(4, 'user@gmail', '$2a$10$ByIUiNaRfBKSV6urZoBBxe4UbJ/sS6u1ZaPORHF9AtNWAuVPVz1by', 'User2','0782602874','male');
+--(5, 'user@gmai', '$2a$10$ByIUiNaRfBKSV6urZoBBxe4UbJ/sS6u1ZaPORHF9AtNWAuVPVz1by', 'User3','0782602874','male');
 --
 --insert into user_role(user_id, role_id) values
 --(1,1),
 --(1,2),
 --(1,3),
 --(3,2);
+--
+--insert into groups(id, instructor_name) values
+--(1,'abdalrahman_alhmouz'),
+--(2,'sawsan'),
+--(3,'amneh');

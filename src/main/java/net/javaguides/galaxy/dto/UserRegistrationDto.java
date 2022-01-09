@@ -3,6 +3,8 @@ package net.javaguides.galaxy.dto;
 import java.util.List;
 
 import javax.validation.constraints.AssertTrue;
+
+import net.javaguides.galaxy.entities.Groups;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -38,6 +40,9 @@ public class UserRegistrationDto {
     private Boolean terms;
     @NotEmpty
     private List<Role> roles;
+
+//    @NotEmpty
+//    private List<Groups> groups;
 
     public List<Role> getRoles() {
         return this.roles;

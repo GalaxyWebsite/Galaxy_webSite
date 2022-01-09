@@ -1,5 +1,6 @@
 <!doctype html>
-<html lang="en">
+<html
+       layout:decorator="layout">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
@@ -8,9 +9,46 @@
     <title>profile</title>
 </head>
 <body>
-<h1><span th:text="${student.getName()}"></span></h1>
-<h1><span th:text="${student.getPhoneNumber()}"></span></h1>
-<h1><span th:text="${student.getEmail()}"></span></h1>
-<h1><span th:text="${student.getGender()}"></span></h1>
+<br>
+<div layout:fragment="content">
+<h1> student Name :<span th:text="${student.getName()}"></span></h1>
+    <br>
+    <br>
+<h1>student phone Number :<span th:text="${student.getPhoneNumber()}"></span></h1>
+    <br>
+    <br>
+
+    <h1> student Email : <span th:text="${student.getEmail()}"></span></h1>
+    <br>
+    <br>
+
+    <h1>student Gender :<span th:text="${student.getGender()}"></span></h1>
+    <br>
+    <br>
+
+    <table style="border: solid 2px black;
+    width: 1000px;
+    height: auto;
+    margin-bottom: 200px;">
+        <tr>
+            <th>Date</th>
+            <th>Details</th>
+            <th>Due</th>
+        </tr>
+    <div th:each="task:${admin.getTasks()}">
+        <div th:if="${task!=null}">
+        <br>
+        <br>
+
+    <tr>
+        <td><span th:text="${task.getCreatedAt()}"></span></td>
+        <td><a th:href="'/DMQRzZWMDdGQtbn/331134333'+${task.getId()}+'MDdGQtbn/DMQRzZ11343'+${student.getId()}"> <span th:text="${task.getBody()}"></span></a></td>
+        <td><span th:text="${task.getDeadLineAt()}"></span></td>
+    </tr>
+    </div>
+    </div>
+    </table>
+    </div>
+</div>
 </body>
 </html>

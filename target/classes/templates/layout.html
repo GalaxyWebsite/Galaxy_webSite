@@ -1,74 +1,92 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
- xmlns:th="http://www.thymeleaf.org"
- xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
- xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
-<meta charset="utf-8" />
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<title layout:title-pattern="$DECORATOR_TITLE - $CONTENT_TITLE">SpringBoot
- Thymeleaf</title>
-<meta
- content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
- name="viewport" />
-<link rel="stylesheet"
- th:href="@{/webjars/bootstrap/3.3.5/css/bootstrap.min.css}" />
-<link rel="stylesheet"
- th:href="@{/webjars/font-awesome/4.5.0/css/font-awesome.min.css}" />
-<!-- <link rel="stylesheet" href="../static/assets/css/styles.css" /> -->
-<style>
-.footer {
-    position: fixed;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    background-color: black;
-    color: white;
-    height: 100px;
-    text-align: center;
-}
-body {
-    padding-top: 75px;
-}
-</style>
+ <meta charset="utf-8" />
+ <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+ <meta
+         content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
+         name="viewport" />
+ <link rel="stylesheet"
+       th:href="@{/webjars/bootstrap/3.3.5/css/bootstrap.min.css}" />
+ <link rel="stylesheet"
+       th:href="@{/webjars/font-awesome/4.5.0/css/font-awesome.min.css}" />
+
+
+ <link th:rel="stylesheet" th:href="@{/assets/css/styles.css}"/>
+<!-- <script type="text/javascript" src="script.js"></script>-->
+ <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
+ <script>
+      $(window).on('scroll', function () {
+         if ($(window).scrollTop()) {
+            $('nav').addClass('black');
+         } else {
+            $('nav').removeClass('black');
+         }
+      })
+   </script>
 </head>
 <body>
- <nav class="navbar navbar-inverse navbar-fixed-top">
-  <div class="container">
-   <div class="navbar-header">
-    <button type="button" class="navbar-toggle collapsed"
-     data-toggle="collapse" data-target="#navbar" aria-expanded="false"
-     aria-controls="navbar">
-     <span class="sr-only">Toggle navigation</span> <span
-      class="icon-bar"></span> <span class="icon-bar"></span> <span
-      class="icon-bar"></span>
-    </button>
-    <a class="navbar-brand" href="#" th:href="@{/}">SpringBoot
-     Thymeleaf</a>
-   </div>
-   <div id="navbar" class="collapse navbar-collapse">
-    <ul class="nav navbar-nav">
-     <li sec:authorize="isAuthenticated()"><a th:href="@{/logout}">Logout</a></li>
-    </ul>
-   </div>
-  </div>
+<!-- Navigation Bar -->
+<header layout:fragment="contentt" id="header">
+ <nav>
+  <div class="logo"><img th:src="@{/assets/images/icon/logo.jpg}" alt="logo"></div>
+  <ul>
+   <li><p><a th:href="@{/home}">User Home</a></p></li>
+   <li> <p><a th:href="@{/admin/tasks}">Admin Home</a></p></li>
+   <li><p sec:authorize="isAuthenticated()"><a th:href="@{/logout}">Logout</a></p></li>
+   <li><p sec:authorize="isAnonymous()"><a th:href="@{/registration}">Register user</a></p></li>
+  </ul>
+  <div class="srch"><input type="text" class="search" placeholder="Search here..."><img
+          th:src="@{/assets/images/icon/search.png}" alt="search" onclick=slide()></div>
+  <p sec:authorize="isAnonymous()"><a class="get-started" th:href="@{/login}">Login</a></p>
+  <img th:src="@{/assets/images/icon/menu.png}" class="menu" onclick="sideMenu(0)" alt="menu">
  </nav>
 
- <div class="container">
-  <div layout:fragment="content">
-   <!-- Your Page Content Here -->
+
+</header>
+<div class="container">
+ <div layout:fragment="content">
+  <!-- Your Page Content Here -->
+ </div>
+</div>
+
+
+
+<footer>
+ <div class="footer-containerr">
+  <div class="left-col">
+   <img th:src="@{/assets/images/icon/logo.jpg}" style="width: 200px;">
+   <div class="logo"></div>
+   <div class="social-media">
+    <a href="#"><img th:src="@{/assets/images/icon/fb.png}"></a>
+    <a href="#"><img th:src="@{/assets/images/icon/insta.png}"></a>
+    <a href="#"><img th:src="@{/assets/images/icon/tt.png}"></a>
+    <a href="#"><img th:src="@{/assets/images/icon/ytube.png}"></a>
+    <a href="#"><img th:src="@{/assets/images/icon/linkedin.png}"></a>
+   </div><br><br>
+   <p class="rights-text">Copyright © 2022</p>
+   <p><img th:src="@{/assets/images/icon/phone.png}"> +962000000<br><img th:src="@{/assets/images/icon/mail.png}">&nbsp; xxxx@gmail.com</p>
+  </div>
+  <div class="right-col">
+   <h1 style="color: #fff">Our Newsletter</h1>
+   <div class="border"></div><br>
+   <p>Enter Your Email to get our News and updates.</p>
+   <form class="newsletter-form">
+    <input class="txtb" type="email" placeholder="Enter Your Email">
+    <input class="btn" type="submit" value="Submit">
+   </form>
   </div>
  </div>
+</footer>
 
- <script th:src="@{'/webjars/jquery/3.5.1/jquery.min.js'}"></script>
- <script th:src="@{'/webjars/bootstrap/3.3.5/js/bootstrap.min.js'}"></script>
 
- <div class="footer">
-  <h1>
-   <a href="#">
-    Galaxy</a>
-  </h1>
- </div>
+<script th:src="@{'/webjars/jquery/3.5.1/jquery.min.js'}"></script>
+<script th:src="@{'/webjars/bootstrap/3.3.5/js/bootstrap.min.js'}"></script>
+
+
 
 </body>
 </html>

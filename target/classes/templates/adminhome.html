@@ -9,14 +9,19 @@
     </head>
     <body>
      <div layout:fragment="content">
-         <p>Welcome Administrator(<span sec:authentication="principal.username">Admin</span>)</p>
-         <p>Welcome Administrator(<span sec:authentication="principal.username">Admin</span>)</p>
-         <p>Welcome Administrator(<span sec:authentication="principal.username">Admin</span>)</p>
-         <p sec:authorize="isAuthenticated()"> <a href="/admin/students">display Students </a></p>
-         <p sec:authorize="isAuthenticated()"> <a href="/admin/tasks">Add Task </a></p>
-
-         <p sec:authorize="isAuthenticated()"><a th:href="@{/logout}">Logout</a></p>
-         <h1> tasksssssssssssssss</h1>
+         <h1>Welcome Administrator(<span sec:authentication="principal.username">Admin</span>)</h1>
+         <p sec:authorize="isAuthenticated()"> <a href="/admin/students" style="border: solid red 2px ;
+            background-color: blue;
+            color: white;">display Students </a></p>
+         <p sec:authorize="isAuthenticated()"> <a href="/admin/tasks" style="border: solid red 2px ;
+            background-color: blue;
+            color: white;">Add course and  Task </a></p>
+<!--         <p sec:authorize="isAuthenticated()"> <a href="/admin/course" style="border: solid red 2px ;-->
+<!--            background-color: blue;-->
+<!--            color: white;">Add course </a></p>-->
+         <p sec:authorize="isAuthenticated()"><a th:href="@{/logout}" style="border: solid red 2px ;
+            background-color: blue;
+            color: white;">Logout</a></p>
 
 
      </div>

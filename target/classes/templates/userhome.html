@@ -8,35 +8,71 @@
    <title>User Home</title>
 </head>
 <body>
- <div layout:fragment="content">
+ <div layout:fragment="content" style="margin-bottom: 200px;">
+  <h1>
+   Welcome <span sec:authentication="principal.username">User to Galaxy !</span>
+  </h1>
+  <p>We’re delighted to have you as a member of our team : Advanced Software Development in php course.
+   It'll be a lot of work and a lot of fun.
+   In this course you will study professional techniques and practices as you develop your skills in php development.
+   This course includes professional development curriculum to get you ready for your job search
+   , plus job search assistance after graduation.</p>
   <p>
-   Welcome <span sec:authentication="principal.username">User</span>
+   <h2>Resources </h2>
+  <ul>
+   <li><a href="https://drive.google.com/file/d/1GSLvw70qwlol0b4Qk5cMGIS2l12m_9qG/edit"> Course Videos : <span>&nbsp;</span>OneDrive</a></li>
+   <li> <a href="https://github.com/abdalrahman-alhmouz?tab=repositories"> Github :Course Outline Repository</a></li>
+   <li><a href="https://zoom.us/j/4042701815?pwd=NENhUnhkMDVpUm5yaGR6U1hLc2pUQT09"> Zoom Link:Zoom</a> </li>
+  </ul>
+
+  <h2>Instructional Staff
+  </h2>
+  <h4>Lead Instructor: Sawsan </h4>
+  <h2>Outcomes</h2>
+  <p>At the end of this course, you will be able to:
+
   </p>
-  <p>
-   <a th:href="@{/logout}">Logout</a>
+  <ul>
+   <li>Write clean, well-tested, advanced Java code using industry-standard software engineering patterns.</li>
+   <li>Understand Computer Science fundamentals in order to differentiate between algorithmic solutions when building applications.
+   </li>
+   <li>Create a successful online brand, network, create an impressive resume, succeed in personal and technical interviews, and conduct a successful job search.
+   </li>
+   <h2>Required Materials:
+   </h2>
+   <p>
+    Students are required to bring their own laptop with plenty of free space on the hard drive. Most students use Macs, simply because they are easy to work with. Others install Linux on their laptops. You must complete the prework before the course begins.
+
+   </p>
+   <h2>courses
+   </h2>
+
+    <div th:each="course:${courses}">
+     <ul th:if="${course!=null}">
+     <li><a th:href="'/courseSubject/'+${course.getId()}"><span th:text="${course.getSubject()}"></span></a></li>
+     </ul>
+    </div>
+  </ul>
+   <a href="/myProfile" style="border: solid red 2px ;
+   background-color: blue;
+   color: white;">my Profile</a>
   </p>
+  <br>
+  <br>
+
   <div sec:authorize="hasRole('ROLE_ADMIN')">
    <h3>You will see this only if you are ADMIN</h3>
    <p>
-    <a th:href="@{/admin/home}">Admin Home</a>
+    <a th:href="@{/admin/tasks}">Admin Home</a>
    </p>
-  </div>
-  <h3>Form with CSRF Token</h3>
-  <form th:action="@{/messages}" method="post">
-   <textarea name="content" cols="50" rows="5"></textarea>
-   <!-- <input type="hidden" th:value='${principal.username}'/>  -->
    <br>
-   <input type="submit" value="Submit" />
-  </form>
-  <div>
-  <br>
-   <div class="panel panel-default">
-    <div class="panel-heading">
-     Messages
-    </div>
-    <p th:each="msg: ${msgs}" th:text="${msg.content}"></p>
-   </div>
+   <br>
+   <p>
+    <a th:href="@{/admin/students}">display Student</a>
+   </p>
+
   </div>
+
  </div>
 
  <h3><a href="grade.html"> Grade</a></h3>

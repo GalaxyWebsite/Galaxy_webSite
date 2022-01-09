@@ -1,0 +1,81 @@
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+      layout:decorator="layout">
+<head>
+    <title>Task Detail </title>
+    <link th:rel="stylesheet" th:href="@{/assets/css/styles.css}"/>
+
+
+</head>
+<body>
+<div layout:fragment="content">
+
+<h1 style="border: solid 2px black;
+height: 400px;
+width: 500px;"
+>Task Detial :<span th:text="${task.getBody()}"></span></h1>
+<h1>Date :<span th:text="${task.getCreatedAt()}"></span></h1>
+<h1>Due Date <span th:text="${task.getDeadLineAt()}"></span></h1>
+
+
+<!--___________________________________ submit student Task -->
+<form  action="/submitTask" method="post">
+    </ul>
+    <input  placeholder="please submit your task link" id="body" name="body">
+    <label for="comment">do you have any comment?</label>
+    <input  type="text"  id="comment" name="comment">
+    <input type="hidden" name="userId" th:value="${user.getId()}">
+    <input type="hidden" name="taskId" th:value="${task.getId()}">
+    <button type="submit" class='btn btn-primary btn-xs'>submit Task</button>
+    </li>
+    </ul>
+</form>
+
+<div th:if="${finalSubmit!=null}">
+    <div th:text=" 'your link submitted is :' + ${finalSubmit.getBody()}"> </div>
+    <div th:text=" 'your comment  is :' + ${finalSubmit.getComment()}"> </div>
+</div>
+<!--____________________________________________-->
+<div sec:authorize="hasRole('ROLE_ADMIN')">
+<form action="/grade" method="post">
+    <lable for="grade">Grade is :</lable>
+    <input type="number" id="grade" name="grade">
+    <lable for="outOf">OutOf is :</lable>
+    <input type="number" id="outOf" name="ouutOf">
+    <input type="hidden" name="userId" th:value="${user.getId()}">
+    <input type="hidden" name="courseId" th:value="${task.getCourses().getId()}">
+    <input type="hidden" name="taskId" th:value="${task.getId()}">
+    <button type="submit"> grade</button>
+</form>
+    </div>
+<div th:if="${gradeStu!=null}">
+    <div th:text=" 'Grade is :' + ${gradeStu.getContent()}"> </div>
+    <div th:text=" 'OutOf is :' + ${gradeStu.getOutOf()}"> </div>
+</div>
+
+    <h3>comment</h3>
+    <form th:action="'/messages/'+${user.getId()}" method="post">
+        <textarea name="content" cols="50" rows="5"></textarea>
+        <input type="hidden" name="id" th:value="${task.getId()}">
+        <br>
+        <input type="submit" value="Submit" />
+    </form>
+    <div>
+        <br>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                comment
+            </div>
+            <p th:each="msg: ${msgs}" th:text="${msg.getContent()}"></p>
+        </div>
+    </div>
+</div>
+
+</div>
+
+
+</body>
+</html>
