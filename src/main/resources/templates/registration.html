@@ -87,31 +87,29 @@
 
                 <div class="form-group">
                     <label>
-                        male:</label>
+                        Gender:</label>
                     <label class="checkbox-inline"  >
                         <input name="gender"
                                type="checkbox" text="male" value="male" />
-                    </label>
-                </div>
+                        Male
 
-                <div class="form-group">
-                    <label>
-                        feMale:</label>
+                    </label>
                     <label class="checkbox-inline"  >
                         <input name="gender"
                                type="checkbox" text="feMale" value="feMale" />
+                        FeMale
+
                     </label>
                 </div>
 
 <!--_______________________________________________________________________________________-->
-<!--                <label>-->
-<!--                    roles:</label>-->
-<!--                <label class="checkbox-inline" th:each="role:${rolesList}" >-->
-<!--                    <input name="roles"-->
-<!--                           type="hidden" th:text="${role.name}" value="3" th:field="*{roles}"/>-->
-                                            type="checkbox" th:text="${role.name}" th:value="${role.id}" th:field="*{roles}"/>
-<!---->
-<!--                </label>-->
+                <label>
+                    groups:</label>
+                <label class="checkbox-inline" th:each="group:${groupsList}" >
+                    <input name="groups"
+                                            type="checkbox" th:text="${group.getInstructorName()}" th:value="${group.getId()}" th:field="*{groups}"/>
+
+                </label>
 <!--                ________________________________________________________________________-->
 
 
@@ -156,8 +154,8 @@
                         roles:</label>
                     <label class="checkbox-inline" th:each="role:${rolesList}" >
                         <input name="roles"
-                               type="hidden" th:text="${role.name}" value="3" th:field="*{roles}"/>
-<!--                        type="checkbox" th:text="${role.name}" th:value="${role.id}" th:field="*{roles}"/>-->
+                        type="checkbox" th:text="${role.name}" th:value="${role.id}" th:field="*{roles}"/>
+<!--                        type="hidden" th:text="${role.name}" value="3" th:field="*{roles}"/>-->
 
                     </label>
                     <p class="error-message"

@@ -7,48 +7,93 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>profile</title>
+    <style>
+
+#customers {
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#customers td, #customers th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#customers tr:nth-child(even){background-color: #f2f2f2;}
+
+#customers tr:hover {background-color: #ddd;}
+
+#customers th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #DDA26D;
+  color: white;
+}
+    </style>
 </head>
 <body>
 <br>
 <div layout:fragment="content">
-<h1> student Name :<span th:text="${student.getName()}"></span></h1>
-    <br>
-    <br>
-<h1>student phone Number :<span th:text="${student.getPhoneNumber()}"></span></h1>
-    <br>
-    <br>
 
-    <h1> student Email : <span th:text="${student.getEmail()}"></span></h1>
-    <br>
-    <br>
 
-    <h1>student Gender :<span th:text="${student.getGender()}"></span></h1>
-    <br>
-    <br>
 
-    <table style="border: solid 2px black;
-    width: 1000px;
-    height: auto;
-    margin-bottom: 200px;">
+
+
+<div class="containerr">
+    <div class="row">
+        <div class="panel panel-default">
+            <div class="panel-heading">  <h4 ><span th:text="${student.getName()}"></span> Profile</h4></div>
+            <div class="panel-body">
+                <div class="col-md-4 col-xs-12 col-sm-6 col-lg-4">
+                    <img alt="User Pic" src="https://t3.ftcdn.net/jpg/03/46/83/96/360_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg" id="profile-image1" class="img-circle img-responsive">
+
+
+                </div>
+                <div class="col-md-8 col-xs-12 col-sm-6 col-lg-8" >
+                    <div class="containerr" >
+                        <h2><span th:text="${student.getName()}"></span></h2>
+                        <p>an   <b> Student</b></p>
+
+
+                    </div>
+                    <hr>
+                    <ul class="containerr details" >
+                        <li><p><span class="glyphicon glyphicon-user one" style="width:50px;"></span><span th:text="${student.getPhoneNumber()}"></span></p></li>
+                        <li><p><span class="glyphicon glyphicon-envelope one" style="width:50px;"></span><span th:text="${student.getEmail()}"</p></li>
+                    </ul>
+                    <hr>
+                    <div class="col-sm-5 col-xs-6 tital " >Gender : <span th:text="${student.getGender()}"></span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <br><br><br><br>
+    <table id="customers">
         <tr>
             <th>Date</th>
             <th>Details</th>
             <th>Due</th>
         </tr>
-    <div th:each="task:${admin.getTasks()}">
-        <div th:if="${task!=null}">
-        <br>
-        <br>
+        <div th:each="task:${admin}">
+            <div th:if="${task!=null}">
+                <br>
+                <br>
 
-    <tr>
-        <td><span th:text="${task.getCreatedAt()}"></span></td>
-        <td><a th:href="'/DMQRzZWMDdGQtbn/331134333'+${task.getId()}+'MDdGQtbn/DMQRzZ11343'+${student.getId()}"> <span th:text="${task.getBody()}"></span></a></td>
-        <td><span th:text="${task.getDeadLineAt()}"></span></td>
-    </tr>
-    </div>
-    </div>
+                <tr>
+                    <td><span th:text="${task.getCreatedAt()}"></span></td>
+                    <td><a th:href="'/DMQRzZWMDdGQtbn/331134333'+${task.getId()}+'MDdGQtbn/DMQRzZ11343'+${student.getId()}"> <span th:text="${task.getTitle()}"></span></a></td>
+                    <td><span th:text="${task.getDeadLineAt()}"></span></td>
+                </tr>
+            </div>
+        </div>
+
+
     </table>
-    </div>
 </div>
+</div>
+
 </body>
 </html>

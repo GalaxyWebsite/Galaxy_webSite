@@ -6,48 +6,116 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    <style>
+        .main{
+ 	padding: 40px 0;
+}
+.main input,
+.main input::-webkit-input-placeholder {
+    font-size: 11px;
+    padding-top: 3px;
+}
+.main-center{
+ 	margin-top: 30px;
+ 	margin: 0 auto;
+ 	max-width: 400px;
+    padding: 40px 40px;
+	background:#DDA26D;
+	    color: #FFF;
+    text-shadow: none;
+	-webkit-box-shadow: 0px 3px 5px 0px rgba(0,0,0,0.31);
+-moz-box-shadow: 0px 3px 5px 0px rgba(0,0,0,0.31);
+box-shadow: 0px 3px 5px 0px rgba(0,0,0,0.31);
+
+}
+span.input-group-addon i {
+    color: #009edf;
+    font-size: 17px;
+}
+
+    </style>
 </head>
 <body>
 <div layout:fragment="content">
 
-    <form  action="/AddTask" method="post">
-        </ul>
-        <input  placeholder="What's in your mind?" id="body" name="body">
-        <label for="title">What's your task title?</label>
-        <input  placeholder="What's your task title?" id="title" name="title">
-        <label for="dueDate">when's the due date?</label>
-        <input  type="date"  id="dueDate" name="dueDate">
-        <label for="dueDate">when's the deadline?</label>
-        <input  type="date"  id="deadLine" name="deadLine">
-        <br>
-        <select name="courseId" id="courseId">
-            <div th:each="cor : ${course}">
-                <option th:value="${cor.getId()}"><span th:text="${cor.getSubject()}"></span></option></div>
-        </select>
+    <div class="containerr">
+        <div class="main">
+            <div class="main-center">
+                <h5>please Add your course here .</h5>
+                <form class="" method="post" action="/AddCourse">
 
-        <button type="submit" class='btn btn-primary btn-xs'>Add Task</button>
-        </li>
-        </ul>
-    </form>
+                    <div class="form-group">
+                        <label for="subject">Courses</label>
+                        <div class="input-group">
+                            <span class="input-group-addon"></span>
+                            <input type="text" class="form-control" name="subject" id="subject"  placeholder="Enter your course Title"/>
+                            <input  type="hidden"  id="group" name="groupId" th:value="${group.getId()}">
 
-    <br>
-    <br>
-    <br>
-    <br>
-    <form  action="/AddCourse" method="post">
-        </ul>
-        <label for="title">What's your course title?</label>
-        <input  placeholder="What's your task title?" id="subject" name="subject">
-        <div class="students" th:each="student : ${students}">
-        <input type="checkbox" id="vehicle1" name="names" th:value="${student.getId()}">
-        <label for="vehicle1"> <span th:text="${student.getName()}"/></label><br>
-        </div>
+                        </div>
+                    </div>
+
+                    <button type="submit">SUBMIT</button>
+
+                </form>
+            </div><!--main-center"-->
+        </div><!--main-->
+    </div><!--container-->
+
+    <div class="container">
+        <div class="main">
+            <div class="main-center">
+                <h5>Sign up once and watch any of our free demos.</h5>
+                <form class="" method="post" action="/AddTask">
+
+                    <div class="form-group">
+                        <label for="title">Task Title</label>
+                        <div class="input-group">
+                            <span class="input-group-addon"></span>
+                            <input type="text" class="form-control" name="title" id="title"  placeholder="Enter Task Title"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="body">Task Body</label>
+                        <div class="input-group">
+                            <span class="input-group-addon"></span>
+                            <input type="text" class="form-control" name="body" id="body" placeholder="Enter Task Body"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="dueDate">dueDate</label>
+                        <div class="input-group">
+                            <span class="input-group-addon"></span>
+                            <input type="date" class="form-control" name="dueDate" id="dueDate" placeholder="Enter dueDate"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="deadLine">dueDate</label>
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fas fa-calendar-alt" aria-hidden="true"></i></span>
+                            <input type="date" class="form-control" name="deadLine" id="deadLine" placeholder="Enter deadLine"/>
+                        </div>
+                    </div>
+                    <input  type="hidden"  id="groupId" name="groupId" th:value="${group.getId()}">
+
+                    <div class="form-group">
+                        <label for="courseId">Pick Course</label>
+                        <select name="courseId" id="courseId">
+                            <div th:each="cor : ${course}">
+                                <option th:value="${cor.getId()}"><span th:text="${cor.getSubject()}"></span></option></div>
+                        </select>
+                    </div>
 
 
-        <button type="submit" class='btn btn-primary btn-xs'>Add Cource</button>
-        </li>
-        </ul>
-    </form>
+                    <button type="submit">SUBMIT</button>
+
+                </form>
+            </div><!--main-center"-->
+        </div><!--main-->
+    </div><!--container-->
+
 </div>
 </body>
 </html>

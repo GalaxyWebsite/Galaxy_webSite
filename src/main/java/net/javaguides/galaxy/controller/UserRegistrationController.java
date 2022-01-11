@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import net.javaguides.galaxy.entities.Groups;
+import net.javaguides.galaxy.repositories.GroupsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,6 +29,8 @@ public class UserRegistrationController {
     private UserService userService;
     @Autowired
     private RoleRepository roleRepository;
+    @Autowired
+    GroupsRepository groupsRepository;
 
     @ModelAttribute("user")
     public UserRegistrationDto userRegistrationDto(){
@@ -36,6 +40,11 @@ public class UserRegistrationController {
     @ModelAttribute("rolesList")
     public List<Role> listOfRoles(){
         return roleRepository.findAll();
+    }
+
+    @ModelAttribute("groupsList")
+    public List<Groups> listOfGroups(){
+        return groupsRepository.findAll();
     }
 
     @GetMapping

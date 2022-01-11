@@ -33,17 +33,25 @@ public class UserController {
         private MessageService messageService ;
     @Autowired
     MessageRepository messageRepository ;
+    @Autowired
+    GroupsRepository groupsRepository ;
 
 
-    @GetMapping("/myProfile")
-    public String displayProfile(Principal p, Model m){
-     User user=userService.findByEmail(p.getName());
-        m.addAttribute("admin",userRepository.findById(1).get());
+    @GetMapping("/myProfile/1d5sad57dsa{groupId}sds5d")
+    public String displayProfile(Principal p, Model m,@PathVariable Integer groupId ){
+        List<Tasks> tasks=taskRepository.findByGroupsId(groupId);
+        User user=userService.findByEmail(p.getName());
+        m.addAttribute("admin",tasks);
         m.addAttribute("student", user);
         return "studentProfile.html";
     }
 
-
+    @GetMapping("/search")
+    public RedirectView findByDescription(@RequestParam String search,Model m,Principal p) {
+        Tasks searchTask=taskRepository.findByTitle(search);
+        User user=userService.findByEmail(p.getName());
+        return new RedirectView("/DMQRzZWMDdGQtbn/331134333"+searchTask.getId()+"MDdGQtbn/DMQRzZ11343"+user.getId());
+    }
     @GetMapping("/DMQRzZWMDdGQtbn/331134333{id}MDdGQtbn/DMQRzZ11343{uId}")
     public String displayTaskDetail(@PathVariable Integer id,@PathVariable Integer uId, Model m) {
         Tasks tasks = taskRepository.findById(id).get();

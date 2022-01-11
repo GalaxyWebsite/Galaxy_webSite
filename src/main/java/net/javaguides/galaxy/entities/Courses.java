@@ -22,9 +22,29 @@ public class Courses {
     @ManyToOne
     private  User user ;
 
-    public Courses(String subject, User user) {
+    @ManyToOne
+    private Groups groups;
+
+    public List<Grade> getGrades() {
+        return grades;
+    }
+
+    public void setGrades(List<Grade> grades) {
+        this.grades = grades;
+    }
+
+    public Groups getGroups() {
+        return groups;
+    }
+
+    public void setGroups(Groups groups) {
+        this.groups = groups;
+    }
+
+    public Courses(String subject, User user,Groups groups) {
         this.subject = subject;
         this.user = user;
+        this.groups=groups;
     }
     public Courses() {
     }

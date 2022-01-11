@@ -27,7 +27,7 @@
 
   <h2>Instructional Staff
   </h2>
-  <h4>Lead Instructor: Sawsan </h4>
+  <h4>Lead Instructor: <div th:if="${group!=null}"> <span th:text="${group.getInstructorName()}"></span></div> </h4>
   <h2>Outcomes</h2>
   <p>At the end of this course, you will be able to:
 
@@ -44,16 +44,16 @@
     Students are required to bring their own laptop with plenty of free space on the hard drive. Most students use Macs, simply because they are easy to work with. Others install Linux on their laptops. You must complete the prework before the course begins.
 
    </p>
-   <h2>courses
+   <h2>courses :
    </h2>
 
     <div th:each="course:${courses}">
      <ul th:if="${course!=null}">
-     <li><a th:href="'/courseSubject/'+${course.getId()}"><span th:text="${course.getSubject()}"></span></a></li>
+      <li><div th:if="${group!=null}"><a th:href="'/courseSubject/331134333'+${course.getId()}+'GQtb/zZ11'+${group.getId()}"><span th:text="${course.getSubject()}"></span></a></div></li>
      </ul>
     </div>
   </ul>
-   <a href="/myProfile" style="border: solid red 2px ;
+   <a th:href="'/myProfile/1d5sad57dsa'+ ${group.getId()}+'sds5d'" style="border: solid red 2px ;
    background-color: blue;
    color: white;">my Profile</a>
   </p>
@@ -63,12 +63,12 @@
   <div sec:authorize="hasRole('ROLE_ADMIN')">
    <h3>You will see this only if you are ADMIN</h3>
    <p>
-    <a th:href="@{/admin/tasks}">Admin Home</a>
+   <div th:if="${group!=null}"> <a th:href="'/admin/tasks/e5s8s4d1'+${group.getId()}+'we5dww'">Admin Home</a></div>
    </p>
    <br>
    <br>
    <p>
-    <a th:href="@{/admin/students}">display Student</a>
+    <a th:href="'/admin/students/145aw741'+${group.getId()}+'wq516q'">display Student</a>
    </p>
 
   </div>

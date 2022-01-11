@@ -39,8 +39,10 @@
    <li><p sec:authorize="isAuthenticated()"><a th:href="@{/logout}">Logout</a></p></li>
    <li><p sec:authorize="isAnonymous()"><a th:href="@{/registration}">Register user</a></p></li>
   </ul>
-  <div class="srch"><input type="text" class="search" placeholder="Search here..."><img
-          th:src="@{/assets/images/icon/search.png}" alt="search" onclick=slide()></div>
+  <form action="/search" method="get">
+  <div class="srch"><input type="text" name="search" class="search" placeholder="Search here..."><button type="submit" ><img
+          th:src="@{/assets/images/icon/search.png}" alt="search" onclick=slide()></button></div>
+   </form>
   <p sec:authorize="isAnonymous()"><a class="get-started" th:href="@{/login}">Login</a></p>
   <img th:src="@{/assets/images/icon/menu.png}" class="menu" onclick="sideMenu(0)" alt="menu">
  </nav>

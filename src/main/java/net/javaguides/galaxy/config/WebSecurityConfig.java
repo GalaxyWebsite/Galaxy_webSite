@@ -1,5 +1,6 @@
 package net.javaguides.galaxy.config;
 
+import net.javaguides.galaxy.repositories.GroupsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

@@ -3,17 +3,52 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+
+    <style>
+
+#customers {
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#customers td, #customers th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#customers tr:nth-child(even){background-color: #f2f2f2;}
+
+#customers tr:hover {background-color: #ddd;}
+
+#customers th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #DDA26D;
+  color: white;
+}
+    </style>
 </head>
 <body>
 <div layout:fragment="content">
-
-    <div th:each="task:${admin.getTasks()}">
-        <h4><span th:text="${task.getBody()}"></span></h4>
-    </div>
-
     <div th:each="course:${courses}">
-        <h4><a th:href="'/courseSubject/'+${course.getId()}"><span th:text="${course.getSubject()}"></span></a></h4>
+        <table id="customers">
+        <tr>
+            Course : <th> <span th:text="${course.getSubject()}"></span></th>
+        </tr>
+            <div th:each="task:${admin}">
+            <tr>
+                    <td><span th:text="${task.getBody()}"></span></td>
+                </tr>
+
+
+    </table>
+
+
     </div>
 </div>
+</div>
 </body>
+<!--<a th:href="'/courseSubject/331134333'+${course.getId()}+'GQtb/zZ11'+${task.getGroups().getId()}"></a>-->
 </html>

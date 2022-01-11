@@ -22,7 +22,8 @@ width: 500px;"
 
 
 <!--___________________________________ submit student Task -->
-<form  action="/submitTask" method="post">
+    <div th:if="${finalSubmit==null}">
+    <form  action="/submitTask" method="post">
     </ul>
     <input  placeholder="please submit your task link" id="body" name="body">
     <label for="comment">do you have any comment?</label>
@@ -33,7 +34,7 @@ width: 500px;"
     </li>
     </ul>
 </form>
-
+    </div>
 <div th:if="${finalSubmit!=null}">
     <div th:text=" 'your link submitted is :' + ${finalSubmit.getBody()}"> </div>
     <div th:text=" 'your comment  is :' + ${finalSubmit.getComment()}"> </div>

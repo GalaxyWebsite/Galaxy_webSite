@@ -34,12 +34,16 @@ public class AdminController {
     TaskDeliveryRepository taskDeliveryRepository;
     @Autowired
     CourseRepository courseRepository ;
+    @Autowired
+            GroupsRepository groupsRepository ;
     ArrayList<User> users=new ArrayList<User>() ;
 
-    @GetMapping("/admin/students")
-    public String  displayStudents(Model m){
-       List<User> user=userRepository.findAll();
-        m.addAttribute("students",user);
+    @GetMapping("/admin/students/145aw741{groupId}wq516q")
+    public String  displayStudents(Model m,@PathVariable Integer groupId){
+        List<User> userOne=userRepository.findByGroupsId(groupId);
+        m.addAttribute("students",userOne);
+        List<User> user=userRepository.findAll();
+//        m.addAttribute("students",userOne);
         return "allStudents.html";
     }
 
@@ -47,48 +51,54 @@ public class AdminController {
     public String displaySingleStudent(@PathVariable Integer id, Model m) {
         User user = userRepository.findById(id).get();
         User tasks=userRepository.findById(1).get();
-        m.addAttribute("admin",tasks);
+        m.addAttribute("admin",tasks.getTasks());
         m.addAttribute("student", user);
         return "studentProfile.html";
     }
-    @GetMapping("/admin/tasks")
-    public String  addTask(Model m){
+    @GetMapping("/admin/tasks/e5s8s4d1{groupId}we5dww")
+    public String  addTask(Model m,@PathVariable Integer groupId){
         List<User> user=userRepository.findAll();
-        List<Courses> courses=courseRepository.findAll();
+        List<Courses> courses=courseRepository.findByGroupsId(groupId);
+        Groups groups=groupsRepository.findById(groupId).get();
         m.addAttribute("students",user);
-        System.out.println(courses.get(0).getSubject()+" cccccccccccccccc");
         m.addAttribute("course",courses);
+        m.addAttribute("group",groups);
         return "taskAdd.html";
     }
 
     @PostMapping("/AddTask")
-    public RedirectView addPost(@RequestParam String title,@RequestParam String body, @RequestParam String dueDate, @RequestParam String deadLine,@RequestParam Integer courseId, Principal p){
+    public RedirectView addPost(@RequestParam String title,@RequestParam String body, @RequestParam String dueDate, @RequestParam String deadLine,@RequestParam Integer courseId,@RequestParam Integer groupId, Principal p){
         user=userService.findByEmail(p.getName());
         Courses courses=courseRepository.findById(courseId).get();
-        Tasks postPage=new Tasks(title,body,dueDate,deadLine,user,courses);
+        Groups groups=groupsRepository.findById(groupId).get();
+        Tasks postPage=new Tasks(title,body,dueDate,deadLine,user,courses,groups);
         taskRepository.save(postPage);
 
-        return new RedirectView("/displayTasks");
+        return new RedirectView("/displayTasks/ftrg4d64d8"+groupId+"d54dr412");
     }
 
     @PostMapping("/AddCourse")
-    public RedirectView addCourse(@RequestParam String subject, HttpServletRequest request, Principal p){
+    public RedirectView addCourse(@RequestParam String subject,@RequestParam Integer groupId, HttpServletRequest request, Principal p){
         user=userService.findByEmail(p.getName());
-        String[] names = request.getParameterValues("names");
-        List<String> list = Arrays.asList(names);
-        for (String stu:list){
-            Integer id=Integer.valueOf(stu);
-            users.add(userRepository.findById(id).get());
-        }
-        Courses courses=new Courses(subject,user);
+        Groups groups=groupsRepository.findById(groupId).get();
+//        String[] names = request.getParameterValues("names");
+//        List<String> list = Arrays.asList(names);
+//        for (String stu:list){
+//            Integer id=Integer.valueOf(stu);
+//            users.add(userRepository.findById(id).get());
+//        }
+        Courses courses=new Courses(subject,user,groups);
         courseRepository.save(courses);
-        return new RedirectView("/displayTasks");
+        return new RedirectView("/displayTasks/ftrg4d64d8"+groupId+"d54dr412");
     }
 
-    @GetMapping("/displayTasks")
-    public String displayTasks(Principal p,Model m){
-        m.addAttribute("admin",userRepository.findById(1).get());
-        m.addAttribute("courses",courseRepository.findAll());
+    @GetMapping("/displayTasks/ftrg4d64d8{groupId}d54dr412")
+    public String displayTasks(Principal p,Model m ,@PathVariable Integer groupId){
+        List<Tasks> tasks=taskRepository.findByGroupsId(groupId);
+        m.addAttribute("admin",tasks.get(0).getId());
+        m.addAttribute("courses",courseRepository.findByGroupsId(groupId));
+//        m.addAttribute("courses",taskRepository.findByCoursesIdAndGroupsId(t,groupId));
+
         return "test.html";
     }
 
@@ -104,10 +114,11 @@ public class AdminController {
 
     }
 
-    @GetMapping("/courseSubject/{id}")
-    public String displayCourses(@PathVariable Integer id, Model m, Principal p) {
+    @GetMapping("/courseSubject/331134333{id}GQtb/zZ11{groupId}")
+    public String displayCourses(@PathVariable Integer id,@PathVariable Integer groupId, Model m, Principal p) {
         Courses courses=courseRepository.findById(id).get();
-        List<Tasks> tasks=taskRepository.findByCoursesId(id);
+        List<Tasks> tasks=taskRepository.findByCoursesIdAndGroupsId(id,groupId);
+//        User userOne=userRepository.findByGroupsId(groupId);
         user=userService.findByEmail(p.getName());
         List<Grade> grade=gradeRepository.findByUserIdAndCoursesId(id,user.getId());
         Integer grd = 0,outOf=1;
@@ -121,6 +132,7 @@ public class AdminController {
         m.addAttribute("task",tasks);
         m.addAttribute("users",user);
         m.addAttribute("userGrade",grd);
+//        m.addAttribute("group",userOne.getGroups().get(0));
 
         return "displayCourses.html";
     }

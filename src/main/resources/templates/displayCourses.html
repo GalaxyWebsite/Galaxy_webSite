@@ -1,5 +1,5 @@
-<!doctype html>
-<html lang="en">
+<!doctype html >
+<html layout:decorator="layout">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
@@ -8,6 +8,7 @@
     <title>display Courses</title>
 </head>
 <body>
+<div layout:fragment="content">
 
 <!--<div th:each="grade :${userGrade}">-->
     <div th:if="${userGrade!=null}">
@@ -20,6 +21,9 @@
     <div th:if="${taskCo!=null}">
         <h5><a th:href="'/DMQRzZWMDdGQtbn/331134333'+${taskCo.getId()}+'MDdGQtbn/DMQRzZ11343'+${users.getId()}"><span th:text="${taskCo.getTitle()}"></span></a></h5>
     </div>
+</div>
+
+
 </div>
 </body>
 </html>

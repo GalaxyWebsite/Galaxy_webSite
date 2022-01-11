@@ -30,7 +30,7 @@ public class UserService {
         user.setPhoneNumber(userRegistrationDto.getPhoneNumber());
         user.setGender(userRegistrationDto.getGender());
         user.setRoles(userRegistrationDto.getRoles());
-        System.out.println(user.getPhoneNumber()+"ssssssssssssssssssssssss");
+        user.setGroups(userRegistrationDto.getGroups());
 
         userRepository.save(user);
     }

@@ -19,7 +19,7 @@ margin-bottom: 200px;">
         <th></th>
     </tr>
     <div class="students" th:each="student : ${students}">
-    <div class="singlePost">
+    <div class="singlePost"  th:if="${student!=null}">
     <tr>
         <td>
         <p><a th:href="'/DMQRzZWMDdGQtbndzBHNsawN0aXRsZQR0ZXN0AzcwMQR3b2UDMjQwMjEwNQ/331134333'+${student.getId()+'31134333'}"><span th:text="${student.getName()}"/></a></p>

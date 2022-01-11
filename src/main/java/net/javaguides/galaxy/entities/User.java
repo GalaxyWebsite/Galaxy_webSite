@@ -50,11 +50,57 @@ public class User {
     )
     private List <Role> roles;
 
-    @ManyToOne
-    private  Groups groups ;
+    @ManyToMany(cascade = CascadeType.MERGE)
+    @JoinTable(
+            name = "user_group",
+            joinColumns = {@JoinColumn(name="USER_ID", referencedColumnName = "ID")},
+            inverseJoinColumns = {@JoinColumn(name="GROUP_ID",referencedColumnName = "ID")}
+    )
+    private  List<Groups> groups ;
 
     @OneToMany(mappedBy = "user")
     private List<Courses> courses;
+
+
+    public List<Groups> getGroups() {
+        return groups;
+    }
+
+    public void setGroups(List<Groups> groups) {
+        this.groups = groups;
+    }
+
+    public List<Courses> getCourses() {
+        return courses;
+    }
+
+    public void setCourses(List<Courses> courses) {
+        this.courses = courses;
+    }
+
+    public List<TaskDelivery> getTaskDeliveries() {
+        return taskDeliveries;
+    }
+
+    public void setTaskDeliveries(List<TaskDelivery> taskDeliveries) {
+        this.taskDeliveries = taskDeliveries;
+    }
+
+    public List<Grade> getGrades() {
+        return grades;
+    }
+
+    public void setGrades(List<Grade> grades) {
+        this.grades = grades;
+    }
+
+    public List<Message> getMessages() {
+        return messages;
+    }
+
+    public void setMessages(List<Message> messages) {
+        this.messages = messages;
+    }
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     public List<Tasks> tasks;

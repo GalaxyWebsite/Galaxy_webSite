@@ -8,6 +8,12 @@ import java.util.List;
 
 @Entity
 public class Tasks {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+    private String createdAt;
+    private String deadLineAt;
     private String title;
     private String body;
 
@@ -23,6 +29,12 @@ public class Tasks {
     @OneToMany(mappedBy = "userTasks", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     public List<TaskDelivery> taskDelivery;
 
+    @ManyToOne
+    private Courses courses;
+
+    @ManyToOne
+    private Groups groups;
+
     public Courses getCourses() {
         return courses;
     }
@@ -31,14 +43,13 @@ public class Tasks {
         this.courses = courses;
     }
 
-    @ManyToOne
-    private Courses courses;
+    public Groups getGroups() {
+        return groups;
+    }
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-    private String createdAt;
-    private String deadLineAt;
+    public void setGroups(Groups groups) {
+        this.groups = groups;
+    }
 
     public String getBody() {
         return body;
@@ -48,13 +59,14 @@ public class Tasks {
         this.body = body;
     }
 
-    public Tasks(String title,String body, String createdAt, String deadLineAt ,User user,Courses courses) {
+    public Tasks(String title,String body, String createdAt, String deadLineAt ,User user,Courses courses,Groups groups) {
         this.body = body;
         this.user = user;
         this.createdAt = createdAt;
         this.deadLineAt = deadLineAt;
         this.title=title;
         this.courses=courses;
+        this.groups=groups;
     }
     public Tasks(){
 
@@ -99,8 +111,6 @@ public class Tasks {
     public void setUser(User user) {
         this.user = user;
     }
-
-
 
     public String getCreatedAt() {
         return createdAt;

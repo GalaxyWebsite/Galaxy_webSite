@@ -41,8 +41,16 @@ public class UserRegistrationDto {
     @NotEmpty
     private List<Role> roles;
 
-//    @NotEmpty
-//    private List<Groups> groups;
+    @NotEmpty
+    private List<Groups> groups;
+
+    public List<Groups> getGroups() {
+        return groups;
+    }
+
+    public void setGroups(List<Groups> groups) {
+        this.groups = groups;
+    }
 
     public List<Role> getRoles() {
         return this.roles;

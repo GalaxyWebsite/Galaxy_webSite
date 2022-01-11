@@ -10,7 +10,7 @@
     <body>
      <div layout:fragment="content">
          <h1>Welcome Administrator(<span sec:authentication="principal.username">Admin</span>)</h1>
-         <p sec:authorize="isAuthenticated()"> <a href="/admin/students" style="border: solid red 2px ;
+         <p sec:authorize="isAuthenticated()"> <a href="/admin/students/" style="border: solid red 2px ;
             background-color: blue;
             color: white;">display Students </a></p>
          <p sec:authorize="isAuthenticated()"> <a href="/admin/tasks" style="border: solid red 2px ;

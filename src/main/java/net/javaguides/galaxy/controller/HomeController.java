@@ -1,10 +1,11 @@
 package net.javaguides.galaxy.controller;
 
 import java.security.Principal;
+import java.util.List;
 
+import net.javaguides.galaxy.entities.Groups;
 import net.javaguides.galaxy.entities.Tasks;
-import net.javaguides.galaxy.repositories.CourseRepository;
-import net.javaguides.galaxy.repositories.TaskRepository;
+import net.javaguides.galaxy.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -35,14 +36,32 @@ public class HomeController {
     private User user;
     @Autowired
     CourseRepository courseRepository ;
+    @Autowired
+    GroupsRepository groupsRepository ;
+    @Autowired
+    UserRepository userRepository ;
+
+    @GetMapping("/home/4rcc31{id}98de92c")
+    public String home(Principal principal,Model model,@PathVariable Integer id){
+        user=userService
+                .findByEmail(
+                        principal.getName()
+                );
+        List<User> userOne=userRepository.findByGroupsId(id);
+        model.addAttribute("group",userOne.get(0).getGroups().get(0));
+        model.addAttribute("courses",courseRepository.findByGroupsId(id));
+
+        return "userhome";
+    }
+
     @GetMapping("/home")
-    public String home(Principal principal,Model model){
+    public RedirectView displayGroups(Principal principal,Model model){
         user=userService
         .findByEmail(
             principal.getName()
         );
         model.addAttribute("courses",courseRepository.findAll());
-        return "userhome";
+        return new RedirectView("/home/4rcc31"+groupsRepository.findByUsersId(user.getId()).getId()+"98de92c");
     }
 
     @PostMapping("/messages/{userId}")
