@@ -16,4 +16,9 @@ public interface GradeRepository extends JpaRepository<Grade,Integer> {
      public  List<Grade> findByUserIdAndCoursesId(@Param("coursesId") Integer coursesId,
                                    @Param("userId") Integer userId);
 
+    @Query("select content from Grade content where id = :id and user_id = :userId and tasks_id = :tasksId")
+    public  Grade findByUserIdAndCoursesId(@Param("userId") Integer userId,
+                                                 @Param("id") Integer id,
+                                           @Param("tasksId") Integer tasksId);
+
 }

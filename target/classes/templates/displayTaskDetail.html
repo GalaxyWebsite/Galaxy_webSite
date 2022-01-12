@@ -8,55 +8,150 @@
     <title>Task Detail </title>
     <link th:rel="stylesheet" th:href="@{/assets/css/styles.css}"/>
 
+    <style>
+        .container{
+            width: 499px;
+                border: 2px solid black;
 
+        }
+    </style>
 </head>
 <body>
 <div layout:fragment="content">
+<!--<h1> task title :<span th:text="${task.getTitle()}"></span></h1>-->
+<!--<h3 style="border: solid 2px black;-->
+<!--height: 400px;-->
+<!--width: 500px;"-->
+<!--&gt;Task Detial :<span th:text="${task.getBody()}"></span></h3>-->
+<!--    <h1>Date :<span th:text="${task.getCreatedAt()}"></span></h1>-->
+<!--<h1>Due Date <span th:text="${task.getDeadLineAt()}"></span></h1>-->
 
-<h1 style="border: solid 2px black;
-height: 400px;
-width: 500px;"
->Task Detial :<span th:text="${task.getBody()}"></span></h1>
-<h1>Date :<span th:text="${task.getCreatedAt()}"></span></h1>
-<h1>Due Date <span th:text="${task.getDeadLineAt()}"></span></h1>
-
-
-<!--___________________________________ submit student Task -->
-    <div th:if="${finalSubmit==null}">
-    <form  action="/submitTask" method="post">
-    </ul>
-    <input  placeholder="please submit your task link" id="body" name="body">
-    <label for="comment">do you have any comment?</label>
-    <input  type="text"  id="comment" name="comment">
-    <input type="hidden" name="userId" th:value="${user.getId()}">
-    <input type="hidden" name="taskId" th:value="${task.getId()}">
-    <button type="submit" class='btn btn-primary btn-xs'>submit Task</button>
-    </li>
-    </ul>
-</form>
+<!--{{{{{{{{{{{{{{{{{{{{{{}}}}}}}}}}}}}}}}}}}}}}}}-->
+<!--<div class="container">-->
+    <div id="list-example" class="list-group">
+        <a class="list-group-item list-group-item-action" href="#list-item-1">Task Title</a>
+        <a class="list-group-item list-group-item-action" href="#list-item-2">Task Content</a>
+        <a class="list-group-item list-group-item-action" href="#list-item-3">Date</a>
+        <a class="list-group-item list-group-item-action" href="#list-item-4">Due Date</a>
     </div>
-<div th:if="${finalSubmit!=null}">
-    <div th:text=" 'your link submitted is :' + ${finalSubmit.getBody()}"> </div>
-    <div th:text=" 'your comment  is :' + ${finalSubmit.getComment()}"> </div>
+    <div data-spy="scroll" data-target="#list-example" data-offset="0" class="scrollspy-example">
+        <h4 id="list-item-1"><br><br><br>Task Title</h4>
+        <p><span th:text="${task.getTitle()}"></span></p>
+        <h4 id="list-item-2">Task Content</h4>
+        <p><span th:text="${task.getBody()}"></span></p>
+        <h4 id="list-item-3">Date : </h4>
+        <p><span th:text="${task.getCreatedAt()}"></span></p>
+        <h4 id="list-item-4">Due Date : </h4>
+        <p><span th:text="${task.getDeadLineAt()}"></span>    </p>
+    </div>
+<!--</div>-->
+<!--___________________________________ submit student Task -->
+    <br><br><br>
+<div th:if="${finalSubmit==null}" >
+    <form   action="/submitTask" method="post">
+        <div class="form-group">
+            <label for="formGroupExampleInput"> delivery task</label>
+            <input type="text" class="form-control" id="formGroupExampleInput" name="body" placeholder="please submit your task link">
+        </div>
+        <div class="form-group">
+            <label for="formGroupExampleInput2"> comment</label>
+            <input type="text" name="comment" class="form-control" id="formGroupExampleInput2" placeholder="do you have any comment?">
+        </div>
+        <input type="hidden" name="userId" th:value="${user.getId()}">
+        <input type="hidden" name="taskId" th:value="${task.getId()}">
+        <button type="submit" class="btn btn-primary" > Submit</button>
+
+    </form>
+</div>
+
+    <br><br><br>
+    <div class="card" th:if="${finalSubmit!=null}">
+        <h5 class="card-header">you Tasks !</h5>
+        <div class="card-body">
+<!--            <h5 class="card-title"><span th:text=" 'your link submitted is :' + ${finalSubmit.getId()}"></span></h5>-->
+            <h5 class="card-title"><span th:text=" 'your link submitted is :' + ${finalSubmit.getBody()}"></span></h5>
+            <p class="card-text"> <span th:text=" 'your comment  is :' + ${finalSubmit.getComment()}"></span></p>
+<!--            <a href="#" class="btn btn-primary">Go somewhere</a>-->
+            <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#coll"> ReSubmit</button>
+
+        </div>
+    </div>
+
+    <div class="collapse" id="coll">
+        <form action="/employees?_method=PUT"  method="get" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="formGroupExampleInput"> delivery task</label>
+                <input type="text" class="form-control" id="formGroupExampleInpu" name="body" placeholder="please submit your task link">
+            </div>
+            <div class="form-group">
+                <label for="formGroupExampleInput2"> comment</label>
+                <input type="text" name="comment" class="form-control" id="formGroupExampleInp" placeholder="do you have any comment?">
+            </div>
+            <input type="hidden" name="userId" th:value="${user.getId()}">
+            <input type="hidden" name="taskId" th:value="${task.getId()}">
+            <input type="hidden" name="deliveryId" th:value="${finalSubmit.getId()}">
+
+            <button type="submit" class="btn btn-primary" > ReSubmit</button>
+
+        </form>
 </div>
 <!--____________________________________________-->
-<div sec:authorize="hasRole('ROLE_ADMIN')">
-<form action="/grade" method="post">
-    <lable for="grade">Grade is :</lable>
-    <input type="number" id="grade" name="grade">
-    <lable for="outOf">OutOf is :</lable>
-    <input type="number" id="outOf" name="ouutOf">
-    <input type="hidden" name="userId" th:value="${user.getId()}">
-    <input type="hidden" name="courseId" th:value="${task.getCourses().getId()}">
-    <input type="hidden" name="taskId" th:value="${task.getId()}">
-    <button type="submit"> grade</button>
-</form>
-    </div>
-<div th:if="${gradeStu!=null}">
-    <div th:text=" 'Grade is :' + ${gradeStu.getContent()}"> </div>
-    <div th:text=" 'OutOf is :' + ${gradeStu.getOutOf()}"> </div>
-</div>
+    <div sec:authorize="hasRole('ROLE_ADMIN')"  th:if="${gradeStu==null}">
+        <form action="/grade" method="post">
+            <div class="form-group">
+                <label for="formGroupExampleInputt"> Grade is :</label>
+                <input type="text" class="form-control" id="formGroupExampleInputt" name="grade" placeholder="please  grade this task">
+            </div>
+            <div class="form-group">
+                <label for="formGroupExampleInput3"> OutOf is :</label>
+                <input type="text" name="ouutOf" class="form-control" id="formGroupExampleInput3" placeholder="please write the outOf mark">
+            </div>
+            <input type="hidden" name="userId" th:value="${user.getId()}">
+            <input type="hidden" name="courseId" th:value="${task.getCourses().getId()}">
+            <input type="hidden" name="taskId" th:value="${task.getId()}">
 
+            <button type="submit" class="btn btn-primary" > Grade</button>
+
+        </form>
+    </div>
+
+
+
+    <br><br><br>
+    <div class="card" th:if="${gradeStu!=null}">
+        <h5 class="card-header">grade !</h5>
+        <div class="card-body">
+            <h5 class="card-title"><span th:text=" 'Grade is :' + ${gradeStu.getContent()}"></span></h5>
+            <p class="card-text"> <span th:text=" 'OutOf is :' + ${gradeStu.getOutOf()}"></span></p>
+            <div sec:authorize="hasRole('ROLE_ADMIN')">
+
+                <button type="submit" class="btn btn-primary" data-toggle="collapse" data-target="#colle"> ReGrade</button>
+                <br><br>
+                <div class="collapse" id="colle">
+
+                    <form action="/reGradeTask?_method=PUT"  method="get" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <label for="formGroupExampleInputt"> Grade is :</label>
+                            <input type="text" class="form-control" id="formGroupExampleInputt4" name="grade" placeholder="please  grade this task">
+                        </div>
+                        <div class="form-group">
+                            <label for="formGroupExampleInput3"> OutOf is :</label>
+                            <input type="text" name="ouutOf" class="form-control" id="formGroupExampleInput4" placeholder="please write the outOf mark">
+                        </div>
+                        <input type="hidden" name="userId" th:value="${user.getId()}">
+                        <input type="hidden" name="courseId" th:value="${task.getCourses().getId()}">
+                        <input type="hidden" name="taskId" th:value="${task.getId()}">
+                        <input type="hidden" name="gradeId" th:value="${gradeStu.getId()}">
+
+                        <button type="submit" class="btn btn-primary" > ReGrade</button>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <br><br><br>
     <h3>comment</h3>
     <form th:action="'/messages/'+${user.getId()}" method="post">
         <textarea name="content" cols="50" rows="5"></textarea>

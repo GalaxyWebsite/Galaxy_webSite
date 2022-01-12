@@ -43,7 +43,7 @@ public class AdminController {
         List<User> userOne=userRepository.findByGroupsId(groupId);
         m.addAttribute("students",userOne);
         List<User> user=userRepository.findAll();
-//        m.addAttribute("students",userOne);
+//        List<Grade> grade=gradeRepository.findByUserIdAndCoursesId(id,user.getId());
         return "allStudents.html";
     }
 
@@ -136,4 +136,23 @@ public class AdminController {
 
         return "displayCourses.html";
     }
+
+
+    @RequestMapping(
+            value = "/reGradeTask",
+            produces = "application/json",
+            method = {RequestMethod.GET, RequestMethod.PUT})
+    public @ResponseBody  RedirectView reGradeTask(@RequestParam Integer grade,@RequestParam Integer ouutOf,@RequestParam Integer userId,@RequestParam Integer taskId,@RequestParam Integer gradeId,Principal p)
+    {
+        User  user=userService.findByEmail(p.getName());
+
+        Grade reGradeTasks=gradeRepository.findByUserIdAndCoursesId(userId,gradeId,taskId);
+        reGradeTasks.setContent(grade);
+        reGradeTasks.setOutOf(ouutOf);
+        gradeRepository.save(reGradeTasks);
+
+        return new RedirectView("/DMQRzZWMDdGQtbn/331134333"+taskId+"MDdGQtbn/DMQRzZ11343"+userId);
+
+    }
+
 }

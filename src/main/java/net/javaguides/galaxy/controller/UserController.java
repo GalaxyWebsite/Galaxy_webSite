@@ -7,10 +7,8 @@ import net.javaguides.galaxy.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.servlet.view.RedirectView;
 
 import java.security.Principal;
@@ -92,5 +90,20 @@ for(TaskDelivery t:taskDelivery) {
         return new RedirectView("/DMQRzZWMDdGQtbn/331134333"+taskId+"MDdGQtbn/DMQRzZ11343"+userId);
     }
 
+    @RequestMapping(
+            value = "/employees",
+            produces = "application/json",
+            method = {RequestMethod.GET, RequestMethod.PUT})
+    public @ResponseBody  RedirectView reSubmitTask(@RequestParam String body, @RequestParam String comment ,@RequestParam Integer userId,@RequestParam Integer taskId,@RequestParam Integer deliveryId,Principal p)
+    {
+        User  user=userService.findByEmail(p.getName());
 
+        TaskDelivery updateTasks=taskDeliveryRepository.findByIdAndStudentId(user.getId(),deliveryId);
+        updateTasks.setBody(body);
+        updateTasks.setComment(comment);
+        taskDeliveryRepository.save(updateTasks);
+
+        return new RedirectView("/DMQRzZWMDdGQtbn/331134333"+taskId+"MDdGQtbn/DMQRzZ11343"+userId);
+
+    }
 }
