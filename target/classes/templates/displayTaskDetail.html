@@ -150,7 +150,15 @@
             </div>
         </div>
     </div>
+<!--{{{{{{{{{{{{{{{{{{{{{{{{{dell}}}}}}}}}}}}}}}}}}}}}-->
+    <div sec:authorize="hasRole('ROLE_ADMIN')"  th:if="${gradeStu==null}">
+    <form action="/deleteTask?_method=DELETE"  method="get" enctype="multipart/form-data">
 
+            <input type="hidden" name="taskId" th:value="${task.getId()}">
+            <button class="btn btn-primary" type="submit" >Delete Task</button>
+    </form>
+    </div>
+<!--  {{{{{{{{{{{{{{{{{{{{{{{{dell}}}}}}}}}}}}}}}}}}}}}}-->
     <br><br><br>
     <h3>comment</h3>
     <form th:action="'/messages/'+${user.getId()}" method="post">

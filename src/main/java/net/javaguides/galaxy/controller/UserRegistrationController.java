@@ -69,7 +69,6 @@ public class UserRegistrationController {
         }
 
         userService.saveUser(userDto);
-        System.out.println(userDto.getPhoneNumber()+"ssssssssssssssssssssssss");
         return "redirect:/registration?success";
     }
 }

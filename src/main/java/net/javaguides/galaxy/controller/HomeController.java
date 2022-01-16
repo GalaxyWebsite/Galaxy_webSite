@@ -72,5 +72,9 @@ public class HomeController {
         return new RedirectView("/DMQRzZWMDdGQtbn/331134333"+id+"MDdGQtbn/DMQRzZ11343"+user.getId());
 
     }
+    @GetMapping("/aboutUs")
+    public String displayAboutUs(){
+        return "aboutUs.html";
+    }
 
 }

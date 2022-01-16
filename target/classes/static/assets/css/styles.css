@@ -22,7 +22,7 @@ body {
 }
 
 header {
-	height: 50vh;
+	height: 12vh;
 	/* background: #000; */
 }
 .black {
@@ -30,7 +30,7 @@ header {
 }
 nav {
 	padding-top: 20px;
-	padding-bottom: 20px;
+	padding-bottom: 10px;
 	top: 0;
 	position: fixed;
 	display: flex;
@@ -59,12 +59,22 @@ nav ul li a {
 nav ul li a:hover {
 	color: #fff;
 	border-radius: 5px;
-	background: #d7c33c;
+	background: #E8BB90;
+		text-decoration: none;
+
+}
+.btne{
+background-color: #FFFFFF;
+border: 0px solid #FFFFFF;
 }
 .active {
 	color: #fff;
 	border-radius: 5px;
 	background: #d7c33c;
+}
+.allItems{
+display:flex;
+flex-direction:row;
 }
 .srch {
 	padding: 2px 10px;
@@ -368,4 +378,5 @@ footer .btn:hover {
 	.feedbox form input, .feedbox form .fname{
 		width: 100%;
 	}
+
 }

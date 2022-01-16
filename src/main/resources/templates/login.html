@@ -1,15 +1,48 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
-      layout:decorator="layout">
+<html >
 <head>
  <title>Log in</title>
+ <link rel="stylesheet"
+       th:href="@{/webjars/bootstrap/3.3.5/css/bootstrap.min.css}" />
+ <link rel="shortcut icon" th:href="@{/assets/images/icon/galaxyco.png}" type="image/x-icon">
+
+ <link th:rel="stylesheet" th:href="@{/assets/css/styles.css}"/>
+ <!-- <script type="text/javascript" src="script.js"></script>-->
+ <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
+ <script>
+      $(window).on('scroll', function () {
+         if ($(window).scrollTop()) {
+            $('nav').addClass('black');
+         } else {
+            $('nav').removeClass('black');
+         }
+      })
+   </script>
 
 </head>
 <body>
-<div layout:fragment="content">
+ <header  id="header">
+  <nav>
+   <div class="logo"><img th:src="@{/assets/images/icon/galaxyco.png}" alt="logo"></div>
+   <ul>
+    <li><p><a href="/home">User Home</a></p></li>
+    <li><p><a href="/"> Home</a></p></li>
+    <li> <p><a th:href="@{/aboutUs}">About Us</a></p></li>
+    <li><p sec:authorize="isAuthenticated()"><a th:href="@{/logout}">Logout</a></p></li>
+    <li><p sec:authorize="isAnonymous()"><a th:href="@{/registration}">Register user</a></p></li>
+   </ul>
+   <form action="/search" method="get">
+    <div class="srch"><input type="text" name="search" class="search" placeholder="Search here..."><button class="btne" type="submit" ><img
+            th:src="@{/assets/images/icon/search.png}" alt="search" onclick=slide()></button></div>
+   </form>
+   <p sec:authorize="isAnonymous()"><a class="get-started" th:href="@{/login}">Login</a></p>
+   <img th:src="@{/assets/images/icon/menu.png}" class="menu" onclick="sideMenu(0)" alt="menu">
+  </nav>
+
+
+ </header>
+ <br><br><br><br><br><br>
+
  <div class="panel col-md-5">
   <div class="panel panel-primary">
    <div class="panel-heading">Login Form</div>
@@ -73,8 +106,47 @@
   </div>
  </div>
 </div>
+ <br><br><br><br><br><br><br><br><br><br>
+ <br><br><br><br><br><br><br><br><br><br>
 
+ <footer>
+  <div class="footer-containerr">
+   <div class="left-col">
+    <img th:src="@{/assets/images/icon/galaxyco.png}" style="width: 200px;"><br><br>
+    <div class="logo"></div>
+    <div class="social-media">
+     <a href="https://www.facebook.com/GalaxyCoOrg/"><img th:src="@{/assets/images/icon/fb.png}"></a>
+     <a href="https://www.instagram.com/galaxyorganization69/"><img th:src="@{/assets/images/icon/insta.png}"></a>
+     <a href="https://twitter.com/GalaxyCoOrg"><img th:src="@{/assets/images/icon/tt.png}"></a>
+     <a href="#"><img th:src="@{/assets/images/icon/ytube.png}"></a>
+     <a href="https://www.linkedin.com/in/galaxy-coorg-bb0574148/"><img th:src="@{/assets/images/icon/linkedin.png}"></a>
+    </div><br><br>
+    <p class="rights-text">Amman-Jordan</p>
+    <p><img th:src="@{/assets/images/icon/phone.png}"> 07 8297 9999<br><img th:src="@{/assets/images/icon/mail.png}">&nbsp;info@galaxyco.org</p>
+   </div>
+   <div class="right-col">
+    <h1 style="color: #fff">About Us</h1>
+    <div class="border"></div><br>
+    <p >Established in 2015,
+     <!--    Galaxy is an IT based non- profit organization dedicated to driving economic growth by undertaking various programs and activities for Children, Youth,-->
+     <!--    and Women and other marginalized segments of the society,-->
+     <!--    by working on developing their skills and improving their standards of living-->
+     <!--    we focus on educational and digital uplifting of these groups through developing-->
+     <!--    and conducting related training and educational activities.-->
+
+    </p>
+    <form class="newsletter-form">
+     <input class="txtb" type="email" placeholder="Enter Your Email">
+     <input class="btn" type="submit" value="Submit">
+    </form>
+   </div>
+  </div>
+ </footer>
 
 </body>
+
+
+<script th:src="@{'/webjars/jquery/3.5.1/jquery.min.js'}"></script>
+<script th:src="@{'/webjars/bootstrap/3.3.5/js/bootstrap.min.js'}"></script>
 
 </html>

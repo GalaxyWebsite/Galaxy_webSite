@@ -1,31 +1,31 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" 
-   xmlns:th="http://www.thymeleaf.org"
-   xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-   xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
-      layout:decorator="layout">      
-    <head>
-        <title>Admin Home</title>
-    </head>
-    <body>
-     <div layout:fragment="content">
-         <h1>Welcome Administrator(<span sec:authentication="principal.username">Admin</span>)</h1>
-         <p sec:authorize="isAuthenticated()"> <a href="/admin/students/" style="border: solid red 2px ;
-            background-color: blue;
-            color: white;">display Students </a></p>
-         <p sec:authorize="isAuthenticated()"> <a href="/admin/tasks" style="border: solid red 2px ;
-            background-color: blue;
-            color: white;">Add course and  Task </a></p>
-<!--         <p sec:authorize="isAuthenticated()"> <a href="/admin/course" style="border: solid red 2px ;-->
+<!--<!DOCTYPE html>-->
+<!--<html xmlns="http://www.w3.org/1999/xhtml" -->
+<!--   xmlns:th="http://www.thymeleaf.org"-->
+<!--   xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"-->
+<!--   xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"-->
+<!--      layout:decorator="layout">      -->
+<!--    <head>-->
+<!--        <title>Admin Home</title>-->
+<!--    </head>-->
+<!--    <body>-->
+<!--     <div layout:fragment="content">-->
+<!--         <h1>Welcome Administrator(<span sec:authentication="principal.username">Admin</span>)</h1>-->
+<!--         <p sec:authorize="isAuthenticated()"> <a href="/admin/students/" style="border: solid red 2px ;-->
 <!--            background-color: blue;-->
-<!--            color: white;">Add course </a></p>-->
-         <p sec:authorize="isAuthenticated()"><a th:href="@{/logout}" style="border: solid red 2px ;
-            background-color: blue;
-            color: white;">Logout</a></p>
+<!--            color: white;">display Students </a></p>-->
+<!--         <p sec:authorize="isAuthenticated()"> <a href="/admin/tasks" style="border: solid red 2px ;-->
+<!--            background-color: blue;-->
+<!--            color: white;">Add course and  Task </a></p>-->
+<!--&lt;!&ndash;         <p sec:authorize="isAuthenticated()"> <a href="/admin/course" style="border: solid red 2px ;&ndash;&gt;-->
+<!--&lt;!&ndash;            background-color: blue;&ndash;&gt;-->
+<!--&lt;!&ndash;            color: white;">Add course </a></p>&ndash;&gt;-->
+<!--         <p sec:authorize="isAuthenticated()"><a th:href="@{/logout}" style="border: solid red 2px ;-->
+<!--            background-color: blue;-->
+<!--            color: white;">Logout</a></p>-->
 
 
-     </div>
-     <h1>This is admin home page</h1>
+<!--     </div>-->
+<!--     <h1>This is admin home page</h1>-->
 
-    </body>
-</html>
+<!--    </body>-->
+<!--</html>-->

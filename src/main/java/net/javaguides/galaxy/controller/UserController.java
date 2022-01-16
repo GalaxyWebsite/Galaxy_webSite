@@ -33,15 +33,73 @@ public class UserController {
     MessageRepository messageRepository ;
     @Autowired
     GroupsRepository groupsRepository ;
+    @Autowired
+    CourseRepository courseRepository;
 
 
     @GetMapping("/myProfile/1d5sad57dsa{groupId}sds5d")
     public String displayProfile(Principal p, Model m,@PathVariable Integer groupId ){
         List<Tasks> tasks=taskRepository.findByGroupsId(groupId);
         User user=userService.findByEmail(p.getName());
+
+
+        List<Grade> grade=gradeRepository.findByUserId(user.getId());
+        System.out.println(" ffffffffffffffffffff "+user.getId());
+        float grd = 0,outOf=1;
+        for (Grade grade1:grade){
+            if (grade1!=null){
+                grd=grd+grade1.getContent();
+                outOf+=grade1.getOutOf();}
+        }
+
+        grd=(grd/outOf)*100 ;
+
+        m.addAttribute("userGrade",Integer.valueOf((int) grd));
         m.addAttribute("admin",tasks);
         m.addAttribute("student", user);
         return "studentProfile.html";
+    }
+
+    @GetMapping("/myProfileInfo")
+    public RedirectView displayProfileInfo(Principal principal,Model model){
+        User user=userService
+                .findByEmail(
+                        principal.getName()
+                );
+        model.addAttribute("courses",courseRepository.findAll());
+        return new RedirectView("/myProfile/1d5sad57dsa"+groupsRepository.findByUsersId(user.getId()).getId()+"sds5d");
+    }
+    @GetMapping("/myGradeInfo")
+    public RedirectView displayGradeInfo(Principal principal,Model model){
+        User user=userService
+                .findByEmail(
+                        principal.getName()
+                );
+        model.addAttribute("courses",courseRepository.findAll());
+        return new RedirectView("/myGrade/1d5sad57dsa"+groupsRepository.findByUsersId(user.getId()).getId()+"sds5d");
+    }
+
+    @GetMapping("/myGrade/1d5sad57dsa{groupId}sds5d")
+    public String displayGrade(Principal p, Model m,@PathVariable Integer groupId ){
+        List<Tasks> tasks=taskRepository.findByGroupsId(groupId);
+        User user=userService.findByEmail(p.getName());
+
+
+        List<Grade> grade=gradeRepository.findByUserId(user.getId());
+        System.out.println(" ffffffffffffffffffff "+user.getId());
+        float grd = 0,outOf=1;
+        for (Grade grade1:grade){
+            if (grade1!=null){
+                grd=grd+grade1.getContent();
+                outOf+=grade1.getOutOf();}
+        }
+
+        grd=(grd/outOf)*100 ;
+
+        m.addAttribute("userGrade",Integer.valueOf((int) grd));
+        m.addAttribute("admin",tasks);
+        m.addAttribute("student", user);
+        return "grade.html";
     }
 
     @GetMapping("/search")
@@ -105,5 +163,31 @@ for(TaskDelivery t:taskDelivery) {
 
         return new RedirectView("/DMQRzZWMDdGQtbn/331134333"+taskId+"MDdGQtbn/DMQRzZ11343"+userId);
 
+    }
+    @GetMapping("/side")
+    public String side(){
+        return "sidebars.html";
+    }
+
+    @GetMapping("/dashBoard")
+    public RedirectView displayDashboard(Principal principal,Model model){
+        User user=userService
+                .findByEmail(
+                        principal.getName()
+                );
+        model.addAttribute("courses",courseRepository.findAll());
+        return new RedirectView("/dashBord/4rcc31"+groupsRepository.findByUsersId(user.getId()).getId()+"98de92c");
+    }
+    @GetMapping("/dashBord/4rcc31{id}98de92c")
+    public String dashBoard(Principal principal,Model model,@PathVariable Integer id){
+        User user=userService
+                .findByEmail(
+                        principal.getName()
+                );
+        List<User> userOne=userRepository.findByGroupsId(id);
+        model.addAttribute("group",userOne.get(0).getGroups().get(0));
+        model.addAttribute("courses",courseRepository.findByGroupsId(id));
+
+        return "displayDashboard.html";
     }
 }

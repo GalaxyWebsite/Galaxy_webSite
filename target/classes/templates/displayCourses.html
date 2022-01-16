@@ -6,24 +6,88 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>display Courses</title>
+
+    <style>
+
+#customers {
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#customers td, #customers th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#customers tr:nth-child(even){background-color: #f2f2f2;}
+
+#customers tr:hover {background-color: #ddd;}
+
+#customers th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #DDA26D;
+  color: white;
+}
+    </style>
 </head>
 <body>
 <div layout:fragment="content">
 
-<!--<div th:each="grade :${userGrade}">-->
-    <div th:if="${userGrade!=null}">
-        <p> your total grade is :<span  th:text="${userGrade}"></span></p>
-    </div>
-<!--</div>-->
+<!--    {{{{{{{{{{{{{{{{{{home}}}}}}}}}}}}}}}}}}}}-->
+    <h1>
+        Welcome <span sec:authentication="principal.username">User to Galaxy !</span>
+    </h1>
+    <p>We’re delighted to have you as a member of our team : Advanced Software Development in php course.
+        It'll be a lot of work and a lot of fun.
+        In this course you will study professional techniques and practices as you develop your skills in php development.
+        This course includes professional development curriculum to get you ready for your job search
+        , plus job search assistance after graduation.</p>
+    <p>
+    <h2>Resources </h2>
+    <ul>
+        <li><a href="https://drive.google.com/file/d/1GSLvw70qwlol0b4Qk5cMGIS2l12m_9qG/edit"> Course Videos : <span>&nbsp;</span>OneDrive</a></li>
+        <li> <a href="https://github.com/abdalrahman-alhmouz?tab=repositories"> Github :Course Outline Repository</a></li>
+        <li><a href="https://zoom.us/j/4042701815?pwd=NENhUnhkMDVpUm5yaGR6U1hLc2pUQT09"> Zoom Link:Zoom</a> </li>
+    </ul>
 
-<h1><span th:text="${course.getSubject()}"></span></h1>
-<div th:each="taskCo :${task}">
-    <div th:if="${taskCo!=null}">
-        <h5><a th:href="'/DMQRzZWMDdGQtbn/331134333'+${taskCo.getId()}+'MDdGQtbn/DMQRzZ11343'+${users.getId()}"><span th:text="${taskCo.getTitle()}"></span></a></h5>
-    </div>
-</div>
+    <h2>Instructional Staff
+    </h2>
+    <h4>Lead Instructor: <div th:if="${group!=null}"> <span th:text="${group.getInstructorName()}"></span></div> </h4>
+    <h2>Outcomes</h2>
+    <p>At the end of this course, you will be able to:
 
+    </p>
+    <ul>
+        <li>Write clean, well-tested, advanced Java code using industry-standard software engineering patterns.</li>
+        <li>Understand Computer Science fundamentals in order to differentiate between algorithmic solutions when building applications.
+        </li>
+        <li>Create a successful online brand, network, create an impressive resume, succeed in personal and technical interviews, and conduct a successful job search.
+        </li>
+        <h2>Required Materials:
+        </h2>
+        <p>
+            Students are required to bring their own laptop with plenty of free space on the hard drive. Most students use Macs, simply because they are easy to work with. Others install Linux on their laptops. You must complete the prework before the course begins.
 
+        </p>
+<!--{{{{{{{{{{{{{{{{{{{{{{{{{{home}}}}}}}}}}}}}}}}}}}}}}}}}}-->
+    <table id="customers">
+        <tr>
+            <th><span th:text="${course.getSubject()}"></span></th>
+            <th><span  th:text="${userGrade}"></span></th>
+        </tr>
+        <div th:each="taskCo :${task}">
+            <div th:if="${taskCo!=null}">
+
+                <tr>
+                    <td><a th:href="'/DMQRzZWMDdGQtbn/331134333'+${taskCo.getId()}+'MDdGQtbn/DMQRzZ11343'+${users.getId()}"><span th:text="${taskCo.getTitle()}"></span></a></td>
+                    <td></td>
+                </tr>
+            </div>
+        </div>
+    </table>
 </div>
 </body>
 </html>

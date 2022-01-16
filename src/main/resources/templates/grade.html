@@ -1,0 +1,77 @@
+<!doctype html>
+<html
+        layout:decorator="layout">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>profile</title>
+    <style>
+
+#customers {
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#customers td, #customers th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#customers tr:nth-child(even){background-color: #f2f2f2;}
+
+#customers tr:hover {background-color: #ddd;}
+
+#customers th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #DDA26D;
+  color: white;
+}
+.totalGrade{
+float:right;
+}
+    </style>
+</head>
+<body>
+<br>
+<div layout:fragment="content">
+
+
+
+
+    <h1 class="totalGrade">Total : <span th:text="${userGrade}"></span></h1>
+    <br><br>
+     <h1 >Grades for <span th:text="${student.getName()}"></span> .</h1>
+    <br><br>
+        <table id="customers">
+            <tr>
+                <th>Name</th>
+                <th>Due</th>
+                <th>Score</th>
+                <th>OutOf</th>
+            </tr>
+            <div th:each="task:${admin}">
+                <div th:if="${task!=null}">
+                    <br>
+                    <br>
+
+                    <tr>
+                        <td><a th:href="'/DMQRzZWMDdGQtbn/331134333'+${task.getId()}+'MDdGQtbn/DMQRzZ11343'+${student.getId()}"> <span th:text="${task.getTitle()}"></span></a></td>
+                        <td><span th:text="${task.getCreatedAt()}"></span></td>
+                        <td><span th:text="${task.getGrade().get(0).getContent()}"></span></td>
+                        <td><span th:text="${task.getGrade().get(0).getOutOf()}"></span></td>
+                    </tr>
+                </div>
+            </div>
+
+
+        </table>
+    </div>
+</div>
+
+</body>
+</html>

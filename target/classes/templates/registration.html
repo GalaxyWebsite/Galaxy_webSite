@@ -29,7 +29,7 @@
 <!-- Navigation Bar -->
 <header layout:fragment="content" id="header">
     <nav>
-        <div class="logo"><img src="assets/images/icon/logo.jpg" alt="logo"></div>
+        <div class="logo"><img th:src="@{/assets/images/icon/galaxyco.png}" alt="logo"></div>
         <ul>
             <li><p><a th:href="@{/home}">User Home</a></p></li>
             <li> <p><a th:href="@{/admin/home}">Admin Home</a></p></li>
@@ -153,9 +153,14 @@
                     <label>
                         roles:</label>
                     <label class="checkbox-inline" th:each="role:${rolesList}" >
-                        <input name="roles"
-                        type="checkbox" th:text="${role.name}" th:value="${role.id}" th:field="*{roles}"/>
-<!--                        type="hidden" th:text="${role.name}" value="3" th:field="*{roles}"/>-->
+                        <div th:if="${role.id==3}">
+                            <input name="roles"
+                                   type="checkbox" th:text="${role.name}" th:value="${role.id}" th:field="*{roles}"/>
+                        </div>
+<!--                        <div th:unless="${role.id!=3}">-->
+<!--                            <input name="roles"-->
+<!--                                   type="checkbox" th:text="${role.name}" th:value="${role.id}" th:field="*{roles}"/>-->
+<!--                        </div>-->
 
                     </label>
                     <p class="error-message"

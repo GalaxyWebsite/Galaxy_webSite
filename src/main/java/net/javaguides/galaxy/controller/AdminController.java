@@ -36,21 +36,58 @@ public class AdminController {
     CourseRepository courseRepository ;
     @Autowired
             GroupsRepository groupsRepository ;
-    ArrayList<User> users=new ArrayList<User>() ;
 
     @GetMapping("/admin/students/145aw741{groupId}wq516q")
     public String  displayStudents(Model m,@PathVariable Integer groupId){
         List<User> userOne=userRepository.findByGroupsId(groupId);
         m.addAttribute("students",userOne);
         List<User> user=userRepository.findAll();
-//        List<Grade> grade=gradeRepository.findByUserIdAndCoursesId(id,user.getId());
         return "allStudents.html";
+    }
+    @RequestMapping(
+            value = "/deleteStu",
+            produces = "application/json",
+            method = {RequestMethod.GET, RequestMethod.DELETE})
+    public RedirectView deleteStu(Model m,@RequestParam Integer userId){
+        User delUser=userRepository.findById(userId).get();
+        Integer groupId=delUser.getGroups().get(0).getId();
+        List<Grade> grades=gradeRepository.findByUserId(userId);
+        for (Grade g:grades)
+        gradeRepository.delete(g);
+        userRepository.delete(delUser);
+        return new RedirectView("/admin/students/145aw741"+groupId+"wq516q");
+    }
+
+    @RequestMapping(
+            value = "/deleteTask",
+            produces = "application/json",
+            method = {RequestMethod.GET, RequestMethod.DELETE})
+    public String deleteTask(Model m,@RequestParam Integer taskId){
+        Tasks tasks=taskRepository.findById(taskId).get();
+        taskRepository.delete(tasks);
+        return "aboutUs.html";
     }
 
     @GetMapping("/DMQRzZWMDdGQtbndzBHNsawN0aXRsZQR0ZXN0AzcwMQR3b2UDMjQwMjEwNQ/331134333{id}31134333")
     public String displaySingleStudent(@PathVariable Integer id, Model m) {
         User user = userRepository.findById(id).get();
         User tasks=userRepository.findById(1).get();
+
+
+        List<Grade> grade=gradeRepository.findByUserId(id);
+        System.out.println(" ffffffffffffffffffff "+user.getId());
+        float grd = 0,outOf=1;
+        for (Grade grade1:grade){
+            if (grade1!=null){
+                grd=grd+grade1.getContent();
+                outOf+=grade1.getOutOf();}
+        }
+
+        grd=(grd/outOf)*100 ;
+
+        m.addAttribute("userGrade",Integer.valueOf((int) grd));
+
+
         m.addAttribute("admin",tasks.getTasks());
         m.addAttribute("student", user);
         return "studentProfile.html";
@@ -97,7 +134,6 @@ public class AdminController {
         List<Tasks> tasks=taskRepository.findByGroupsId(groupId);
         m.addAttribute("admin",tasks.get(0).getId());
         m.addAttribute("courses",courseRepository.findByGroupsId(groupId));
-//        m.addAttribute("courses",taskRepository.findByCoursesIdAndGroupsId(t,groupId));
 
         return "test.html";
     }
@@ -118,21 +154,23 @@ public class AdminController {
     public String displayCourses(@PathVariable Integer id,@PathVariable Integer groupId, Model m, Principal p) {
         Courses courses=courseRepository.findById(id).get();
         List<Tasks> tasks=taskRepository.findByCoursesIdAndGroupsId(id,groupId);
-//        User userOne=userRepository.findByGroupsId(groupId);
         user=userService.findByEmail(p.getName());
         List<Grade> grade=gradeRepository.findByUserIdAndCoursesId(id,user.getId());
-        Integer grd = 0,outOf=1;
+        System.out.println(id+" ffffffffffffffffffff "+user.getId());
+        float grd = 0,outOf=1;
         for (Grade grade1:grade){
             if (grade1!=null){
             grd=grd+grade1.getContent();
             outOf+=grade1.getOutOf();}
         }
+
         grd=(grd/outOf)*100 ;
+        List<User> userOne=userRepository.findByGroupsId(groupId);
         m.addAttribute("course",courses);
         m.addAttribute("task",tasks);
         m.addAttribute("users",user);
-        m.addAttribute("userGrade",grd);
-//        m.addAttribute("group",userOne.getGroups().get(0));
+        m.addAttribute("userGrade",Integer.valueOf((int) grd));
+        m.addAttribute("group",userOne.get(0).getGroups().get(0));
 
         return "displayCourses.html";
     }
@@ -154,5 +192,8 @@ public class AdminController {
         return new RedirectView("/DMQRzZWMDdGQtbn/331134333"+taskId+"MDdGQtbn/DMQRzZ11343"+userId);
 
     }
+
+
+
 
 }

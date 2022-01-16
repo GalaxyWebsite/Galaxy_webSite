@@ -9,11 +9,15 @@
 
 
     <style>
-
+table{
+  border-radius: 20px 0 ;
+}
 #customers {
   font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
-  border-collapse: collapse;
+    border-radius: 20px 0 ;
+    margin-top:20px ;
   width: 100%;
+
 }
 
 #customers td, #customers th {
@@ -29,9 +33,11 @@
   padding-top: 12px;
   padding-bottom: 12px;
   text-align: left;
-  background-color: #DDA26D;
+  background-color: #E8BB90;
   color: white;
+
 }
+
     </style>
 </head>
 <body>
@@ -40,18 +46,25 @@
     <table id="customers">
         <tr>
             <th>student name </th>
+            <th>Delete </th>
         </tr>
-
         <div class="students" th:each="student : ${students}">
             <div class="singlePost"  th:if="${student!=null}">
                 <tr>
                     <td>
                         <p><a th:href="'/DMQRzZWMDdGQtbndzBHNsawN0aXRsZQR0ZXN0AzcwMQR3b2UDMjQwMjEwNQ/331134333'+${student.getId()+'31134333'}"><span th:text="${student.getName()}"/></a></p>
                     </td>
+                    <form action="/deleteStu?_method=DELETE"  method="get" enctype="multipart/form-data">
+
+                    <td>
+                        <input type="hidden" name="userId" th:value="${student.getId()}">
+                        <button class="btn" type="submit" >Delete Student</button>
+                    </td>
+                    </form>
+
                 </tr>
             </div>
         </div>
-
     </table>
             <!--        <h4><span th:text="${student.getFirstName()}+' '+${student.getLastName()}"/></h4>-->
 

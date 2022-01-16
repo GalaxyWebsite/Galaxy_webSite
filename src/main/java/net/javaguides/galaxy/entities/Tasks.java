@@ -15,6 +15,7 @@ public class Tasks {
     private String createdAt;
     private String deadLineAt;
     private String title;
+    @Column(length = 2000000)
     private String body;
 
      @OneToMany(mappedBy = "messageTask")

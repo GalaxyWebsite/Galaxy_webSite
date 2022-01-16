@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+      layout:decorator="layout">
+<head>
+    <title>About Us</title>
+    <style>
+        .aboutUsCl{
+        display: flex;
+        flex-direction: row;
+        }
+        .welcomeMsg{
+            background-color: #F7D7C4;
+            float: right;
+    width: 40%;
+    height: auto;
+    margin-left: 56px;
+        }
+        .AboutIMG{
+            width: 193px;
+    height: auto;
+    float: right;
+    padding: 10px 0 20px 20px;
+        }
+        p{
+            font-size: 16px;
+    margin: 0;
+    padding: 0;
+    color: #787878;
+    display: block;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    }
+    .title{
+        color: #c0a53e;
+    }
+    h1{
+        font-size: 20px;
+    color: #797979;
+    font-family: 'MyriadPro-Semibold';
+    margin-top: 0;
+    }
+    .left{
+        float: left;
+    width: 55%;
+    height: auto;
+    }
+    .Latter{
+        width: 100%;
+    min-height: 600px;
+    background: -webkit-linear-gradient(top,#fed8c4, #fad7c4);
+    background: -o-linear-gradient(top, #fed8c4, #fad7c4);
+    background: -moz-linear-gradient(top, #fed8c4, #fad7c4);
+    background: linear-gradient(to top, #fed8c4, #fed8c4);
+    }
+
+    .Latter h2 {
+    color: #797979;
+    padding-left: 20px;
+    float: left;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    text-align: left;
+}
+.Latter p {
+    color: #797979;
+    padding: 10px 20px;
+}
+.clear{
+    height: 100px;
+}
+header{
+	height: 14vh;
+
+}
+    </style>
+</head>
+<body>
+<div  layout:fragment="content" >
+    <br><br>
+    <div class="aboutUsCl" >
+<div class="left abT">
+   <h1 class="title">WHO WE ARE</h1>
+    <img class="AboutIMG" th:src="@{/assets/images/icon/about.jpg}">
+<p>
+    Established in 2015, Galaxy is an IT based non- profit organization dedicated to driving economic growth by undertaking various programs and activities for Children, Youth, and Women and other marginalized segments of the society, by working on developing their skills and improving their standards of living we focus on educational and digital uplifting of these groups through developing and conducting related training and educational activities.
+
+    Galaxy is keen on facilitating sustainable development by creating balance between Society, Economy and the Environment through actively working with potential contributors, government entities, service providers, literacy centers, universities and colleges to bring knowledge and expertise to where they are mostly needed.
+
+    Driven to help people in vulnerable technological situations, we are working on spreading knowledge related to using computers through providing them with recycled devices after being prepared and tested by fresh graduates as part of their work experience thus focusing on communities in need for being aware of technological solutions.
+</p>
+   <h1 class="title">OUR VISION</h1>
+    <p>
+    We seek a world where all Women, Youth and Children; even in the most remote areas; will be able to hold the power to create a better opportunity for themselves and others.
+    </p>
+    <h1 class="title">OUR MISSION</h1>
+    <p>Galaxy is an IT based, non-profit organization with a driving passion towards helping all segments of the community to obtain an immediate and lasting sustainable technological solutions and services that will create a supportive, productive and equal future for everyone.
+
+</p>
+    </div>
+<div class="welcomeMsg">
+    <div class="Latter">
+   <h2> WELCOME MESSAGE</h2>
+        <div class="clear"></div>
+   <p style="text-align:justify">
+    Welcome to Galaxy organization's website where we believe on transforms the country’s most impoverished kids into tomorrow’s leaders, by supporting education, family and community development programs into the heart of most impoverished communities.
+
+    Since long time we have been working with children , Youth & Women living in crippling poverty community. We believe that with the right education and support, one child can lift their family out of poverty.
+
+    When you give once it will come back to you several times.. the giving is a universe blessing … with your support and help you understand how little it takes to give some joy to those who are suffering. In the meantime it will help you to understand how lucky we were to be born in this part of the world.
+</p>
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>

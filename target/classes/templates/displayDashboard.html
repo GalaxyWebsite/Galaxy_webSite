@@ -1,0 +1,33 @@
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+      layout:decorator="layout">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .card{
+            margin:40px 40px ;
+        }
+    </style>
+</head>
+<body>
+<div layout:fragment="content" style="margin-bottom: 200px;">
+
+    <div class="card" style="width: 18rem;" th:each="course:${courses}">
+        <img class="card-img-top" th:src="@{/assets/images/icon/logo.jpg}" alt="Card image cap">
+        <div class="card-body" th:if="${course!=null}">
+            <h4 class="card-title"><span th:text="${course.getSubject()}"></span></h4>
+<!--            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>-->
+            <a th:href="'/courseSubject/331134333'+${course.getId()}+'GQtb/zZ11'+${group.getId()}" class="btn btn-primary">Go to <span th:text="${course.getSubject()}"></span></a>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
