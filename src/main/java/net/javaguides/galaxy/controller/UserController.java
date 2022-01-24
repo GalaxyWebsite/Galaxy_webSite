@@ -83,22 +83,20 @@ public class UserController {
     public String displayGrade(Principal p, Model m,@PathVariable Integer groupId ){
         List<Tasks> tasks=taskRepository.findByGroupsId(groupId);
         User user=userService.findByEmail(p.getName());
-
-
         List<Grade> grade=gradeRepository.findByUserId(user.getId());
-        System.out.println(" ffffffffffffffffffff "+user.getId());
+
         float grd = 0,outOf=1;
         for (Grade grade1:grade){
             if (grade1!=null){
                 grd=grd+grade1.getContent();
                 outOf+=grade1.getOutOf();}
         }
-
         grd=(grd/outOf)*100 ;
 
         m.addAttribute("userGrade",Integer.valueOf((int) grd));
         m.addAttribute("admin",tasks);
         m.addAttribute("student", user);
+        m.addAttribute("gradeRepo", gradeRepository);
         return "grade.html";
     }
 

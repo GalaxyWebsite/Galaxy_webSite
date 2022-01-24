@@ -1,6 +1,8 @@
 package net.javaguides.galaxy.entities;
 
+import net.javaguides.galaxy.repositories.GradeRepository;
 import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -8,7 +10,6 @@ import java.util.List;
 
 @Entity
 public class Tasks {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -54,6 +55,9 @@ public class Tasks {
 
     public String getBody() {
         return body;
+    }
+    public Grade getgradee(GradeRepository gradeRepository,Integer userId,Integer taskId) {
+        return gradeRepository.findByUserIdAndTasksId(userId,taskId);
     }
 
     public void setBody(String body) {

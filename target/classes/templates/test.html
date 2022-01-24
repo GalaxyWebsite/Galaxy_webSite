@@ -32,21 +32,19 @@
 </head>
 <body>
 <div layout:fragment="content">
-    <div th:each="course:${courses}">
         <table id="customers">
         <tr>
-            Course : <th> <span th:text="${course.getSubject()}"></span></th>
+            Course : <th> <span th:text="${courses.getSubject()}"></span></th>
         </tr>
             <div th:each="task:${admin}">
             <tr>
                     <td><span th:text="${task.getBody()}"></span></td>
                 </tr>
 
-
+            </div>
     </table>
 
 
-    </div>
 </div>
 </div>
 </body>

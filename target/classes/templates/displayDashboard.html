@@ -25,6 +25,17 @@
             <h4 class="card-title"><span th:text="${course.getSubject()}"></span></h4>
 <!--            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>-->
             <a th:href="'/courseSubject/331134333'+${course.getId()}+'GQtb/zZ11'+${group.getId()}" class="btn btn-primary">Go to <span th:text="${course.getSubject()}"></span></a>
+            <!--{{{{{{{{{{{{{{{{{{{{{{{{{dell}}}}}}}}}}}}}}}}}}}}}-->
+            <br>
+            <br>
+            <div sec:authorize="hasRole('ROLE_ADMIN')" style="float:left;">
+                <form action="/deleteCourse?_method=DELETE"  method="get" enctype="multipart/form-data">
+
+                    <input type="hidden" name="courseId" th:value="${course.getId()}">
+                    <button class="btn btn-primary" type="submit" >Delete Course</button>
+                </form>
+            </div>
+            <!--  {{{{{{{{{{{{{{{{{{{{{{{{dell}}}}}}}}}}}}}}}}}}}}}}-->
         </div>
     </div>
 </div>

@@ -20,7 +20,8 @@
  	margin: 0 auto;
  	max-width: 400px;
     padding: 40px 40px;
-	background:#C1A633;
+	background:#E8BB90;
+<!--background-color:#E8BB90;-->
 	    color: #FFF;
     text-shadow: none;
 	-webkit-box-shadow: 0px 3px 5px 0px rgba(0,0,0,0.31);
@@ -35,6 +36,10 @@ span.input-group-addon i {
 #course{
 margin:0 -22px 0 0px ;
 }
+button{
+    height: 30px;
+    width: 60px;
+    }
 
     </style>
 </head>
@@ -51,13 +56,13 @@ margin:0 -22px 0 0px ;
                         <label for="subject">Courses</label>
                         <div class="input-group">
                             <span class="input-group-addon"></span>
-                            <input type="text" class="form-control" name="subject" id="subject"  placeholder="Enter your course Title"/>
+                            <input required type="text" class="form-control" name="subject" id="subject"  placeholder="Enter your course Title"/>
                             <input  type="hidden"  id="group" name="groupId" th:value="${group.getId()}">
 
                         </div>
                     </div>
 
-                    <button type="submit">SUBMIT</button>
+                    <button type="submit">Add Course</button>
 
                 </form>
             </div><!--main-center"-->
@@ -74,7 +79,7 @@ margin:0 -22px 0 0px ;
                         <label for="title">Task Title</label>
                         <div class="input-group">
                             <span class="input-group-addon"></span>
-                            <input type="text" class="form-control" name="title" id="title"  placeholder="Enter Task Title"/>
+                            <input required type="text" class="form-control" name="title" id="title"  placeholder="Enter Task Title"/>
                         </div>
                     </div>
 
@@ -82,7 +87,7 @@ margin:0 -22px 0 0px ;
                         <label for="body">Task Body</label>
                         <div class="input-group">
                             <span class="input-group-addon"></span>
-                            <input type="text" class="form-control" name="body" id="body" placeholder="Enter Task Body"/>
+                            <input required style="height:260px;" type="text" class="form-control" name="body" id="body" placeholder="Enter Task Body"/>
                         </div>
                     </div>
 
@@ -90,7 +95,7 @@ margin:0 -22px 0 0px ;
                         <label for="dueDate">dueDate</label>
                         <div class="input-group">
                             <span class="input-group-addon"></span>
-                            <input type="date" class="form-control" name="dueDate" id="dueDate" placeholder="Enter dueDate"/>
+                            <input required type="date" class="form-control" name="dueDate" id="dueDate" placeholder="Enter dueDate"/>
                         </div>
                     </div>
 
@@ -98,21 +103,22 @@ margin:0 -22px 0 0px ;
                         <label for="deadLine">dueDate</label>
                         <div class="input-group">
                             <span class="input-group-addon"><i class="fas fa-calendar-alt" aria-hidden="true"></i></span>
-                            <input type="date" class="form-control" name="deadLine" id="deadLine" placeholder="Enter deadLine"/>
+                            <input required type="date" class="form-control" name="deadLine" id="deadLine" placeholder="Enter deadLine"/>
                         </div>
                     </div>
                     <input  type="hidden"  id="groupId" name="groupId" th:value="${group.getId()}">
 
-                    <div class="form-group">
-                        <label for="courseId">Pick Course</label>
-                        <select name="courseId" id="courseId">
+                    <div class="">
+                        <label for="courseId">Pick Course :</label>
+                        <select name="courseId" id="courseId" style="width:150px;">
                             <div th:each="cor : ${course}">
-                                <option th:value="${cor.getId()}"><span th:text="${cor.getSubject()}"></span></option></div>
+                                <option th:value="${cor.getId()}"><span th:text="${cor.getSubject()}"></span></option>
+                            </div>
                         </select>
                     </div>
 
 
-                    <button type="submit">SUBMIT</button>
+                    <button type="submit">Add Task</button>
 
                 </form>
             </div><!--main-center"-->

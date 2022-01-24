@@ -18,20 +18,25 @@
 </head>
 <body>
 <div layout:fragment="content">
-<!--<h1> task title :<span th:text="${task.getTitle()}"></span></h1>-->
-<!--<h3 style="border: solid 2px black;-->
-<!--height: 400px;-->
-<!--width: 500px;"-->
-<!--&gt;Task Detial :<span th:text="${task.getBody()}"></span></h3>-->
-<!--    <h1>Date :<span th:text="${task.getCreatedAt()}"></span></h1>-->
-<!--<h1>Due Date <span th:text="${task.getDeadLineAt()}"></span></h1>-->
-
-<!--{{{{{{{{{{{{{{{{{{{{{{}}}}}}}}}}}}}}}}}}}}}}}}-->
-<!--<div class="container">-->
-    <div id="list-example" class="list-group">
+<!--    <h3>comment</h3>-->
+<!--    <form th:action="'/messages/'+${user.getId()}" method="post">-->
+<!--        <textarea name="content" cols="50" rows="5"></textarea>-->
+<!--        <input type="hidden" name="id" th:value="${task.getId()}">-->
+<!--        <br>-->
+<!--        <input type="submit" value="Submit" />-->
+<!--    </form>-->
+<!--    <div>-->
+<!--        <br>-->
+<!--        <div class="panel panel-default">-->
+<!--            <div class="panel-heading">-->
+<!--                comment-->
+<!--            </div>-->
+<!--            <p th:each="msg: ${msgs}" th:text="${msg.getContent()}"></p>-->
+<!--        </div>-->
+    </div>    <div id="list-example" class="list-group">
         <a class="list-group-item list-group-item-action" href="#list-item-1">Task Title</a>
         <a class="list-group-item list-group-item-action" href="#list-item-2">Task Content</a>
-        <a class="list-group-item list-group-item-action" href="#list-item-3">Date</a>
+        <a class="list-group-item list-group-item-action" href="#list-item-3">Grade</a>
         <a class="list-group-item list-group-item-action" href="#list-item-4">Due Date</a>
     </div>
     <div data-spy="scroll" data-target="#list-example" data-offset="0" class="scrollspy-example">
@@ -51,11 +56,11 @@
     <form   action="/submitTask" method="post">
         <div class="form-group">
             <label for="formGroupExampleInput"> delivery task</label>
-            <input type="text" class="form-control" id="formGroupExampleInput" name="body" placeholder="please submit your task link">
+            <input required type="text" class="form-control" id="formGroupExampleInput" name="body" placeholder="please submit your task link">
         </div>
         <div class="form-group">
             <label for="formGroupExampleInput2"> comment</label>
-            <input type="text" name="comment" class="form-control" id="formGroupExampleInput2" placeholder="do you have any comment?">
+            <input required type="text" name="comment" class="form-control" id="formGroupExampleInput2" placeholder="do you have any comment?">
         </div>
         <input type="hidden" name="userId" th:value="${user.getId()}">
         <input type="hidden" name="taskId" th:value="${task.getId()}">
@@ -81,11 +86,11 @@
         <form action="/employees?_method=PUT"  method="get" enctype="multipart/form-data">
             <div class="form-group">
                 <label for="formGroupExampleInput"> delivery task</label>
-                <input type="text" class="form-control" id="formGroupExampleInpu" name="body" placeholder="please submit your task link">
+                <input required type="text" class="form-control" id="formGroupExampleInpu" name="body" placeholder="please submit your task link">
             </div>
             <div class="form-group">
                 <label for="formGroupExampleInput2"> comment</label>
-                <input type="text" name="comment" class="form-control" id="formGroupExampleInp" placeholder="do you have any comment?">
+                <input required type="text" name="comment" class="form-control" id="formGroupExampleInp" placeholder="do you have any comment?">
             </div>
             <input type="hidden" name="userId" th:value="${user.getId()}">
             <input type="hidden" name="taskId" th:value="${task.getId()}">
@@ -100,11 +105,11 @@
         <form action="/grade" method="post">
             <div class="form-group">
                 <label for="formGroupExampleInputt"> Grade is :</label>
-                <input type="text" class="form-control" id="formGroupExampleInputt" name="grade" placeholder="please  grade this task">
+                <input required type="text" class="form-control" id="formGroupExampleInputt" name="grade" placeholder="please  grade this task">
             </div>
             <div class="form-group">
                 <label for="formGroupExampleInput3"> OutOf is :</label>
-                <input type="text" name="ouutOf" class="form-control" id="formGroupExampleInput3" placeholder="please write the outOf mark">
+                <input required type="text" name="ouutOf" class="form-control" id="formGroupExampleInput3" placeholder="please write the outOf mark">
             </div>
             <input type="hidden" name="userId" th:value="${user.getId()}">
             <input type="hidden" name="courseId" th:value="${task.getCourses().getId()}">
@@ -132,11 +137,11 @@
                     <form action="/reGradeTask?_method=PUT"  method="get" enctype="multipart/form-data">
                         <div class="form-group">
                             <label for="formGroupExampleInputt"> Grade is :</label>
-                            <input type="text" class="form-control" id="formGroupExampleInputt4" name="grade" placeholder="please  grade this task">
+                            <input required type="text" class="form-control" id="formGroupExampleInputt4" name="grade" placeholder="please  grade this task">
                         </div>
                         <div class="form-group">
                             <label for="formGroupExampleInput3"> OutOf is :</label>
-                            <input type="text" name="ouutOf" class="form-control" id="formGroupExampleInput4" placeholder="please write the outOf mark">
+                            <input required type="text" name="ouutOf" class="form-control" id="formGroupExampleInput4" placeholder="please write the outOf mark">
                         </div>
                         <input type="hidden" name="userId" th:value="${user.getId()}">
                         <input type="hidden" name="courseId" th:value="${task.getCourses().getId()}">
@@ -150,8 +155,13 @@
             </div>
         </div>
     </div>
+
+
+
 <!--{{{{{{{{{{{{{{{{{{{{{{{{{dell}}}}}}}}}}}}}}}}}}}}}-->
-    <div sec:authorize="hasRole('ROLE_ADMIN')"  th:if="${gradeStu==null}">
+
+    <br>
+    <div sec:authorize="hasRole('ROLE_ADMIN')" style="float:right;">
     <form action="/deleteTask?_method=DELETE"  method="get" enctype="multipart/form-data">
 
             <input type="hidden" name="taskId" th:value="${task.getId()}">
@@ -160,23 +170,11 @@
     </div>
 <!--  {{{{{{{{{{{{{{{{{{{{{{{{dell}}}}}}}}}}}}}}}}}}}}}}-->
     <br><br><br>
-    <h3>comment</h3>
-    <form th:action="'/messages/'+${user.getId()}" method="post">
-        <textarea name="content" cols="50" rows="5"></textarea>
-        <input type="hidden" name="id" th:value="${task.getId()}">
-        <br>
-        <input type="submit" value="Submit" />
-    </form>
-    <div>
-        <br>
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                comment
-            </div>
-            <p th:each="msg: ${msgs}" th:text="${msg.getContent()}"></p>
-        </div>
-    </div>
+
 </div>
+
+
+
 
 </div>
 

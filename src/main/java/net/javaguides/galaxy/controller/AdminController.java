@@ -111,29 +111,23 @@ public class AdminController {
         Tasks postPage=new Tasks(title,body,dueDate,deadLine,user,courses,groups);
         taskRepository.save(postPage);
 
-        return new RedirectView("/displayTasks/ftrg4d64d8"+groupId+"d54dr412");
+        return new RedirectView("/displayTasks/ftrg4d64d8"+groupId+"d54dr412"+courseId);
     }
 
     @PostMapping("/AddCourse")
     public RedirectView addCourse(@RequestParam String subject,@RequestParam Integer groupId, HttpServletRequest request, Principal p){
         user=userService.findByEmail(p.getName());
         Groups groups=groupsRepository.findById(groupId).get();
-//        String[] names = request.getParameterValues("names");
-//        List<String> list = Arrays.asList(names);
-//        for (String stu:list){
-//            Integer id=Integer.valueOf(stu);
-//            users.add(userRepository.findById(id).get());
-//        }
         Courses courses=new Courses(subject,user,groups);
         courseRepository.save(courses);
-        return new RedirectView("/displayTasks/ftrg4d64d8"+groupId+"d54dr412");
+        return new RedirectView("/dashBord/4rcc31"+groupsRepository.findByUsersId(user.getId()).getId()+"98de92c");
     }
 
-    @GetMapping("/displayTasks/ftrg4d64d8{groupId}d54dr412")
-    public String displayTasks(Principal p,Model m ,@PathVariable Integer groupId){
-        List<Tasks> tasks=taskRepository.findByGroupsId(groupId);
-        m.addAttribute("admin",tasks.get(0).getId());
-        m.addAttribute("courses",courseRepository.findByGroupsId(groupId));
+    @GetMapping("/displayTasks/ftrg4d64d8{groupId}d54dr412{courseId}")
+    public String displayTasks(Principal p,Model m ,@PathVariable Integer groupId,@PathVariable Integer courseId){
+        List<Tasks> tasks=taskRepository.findByCoursesIdAndGroupsId(courseId,groupId);
+        m.addAttribute("admin",tasks);
+        m.addAttribute("courses",courseRepository.findByIdAndGroupId(courseId,groupId));
 
         return "test.html";
     }
@@ -193,7 +187,24 @@ public class AdminController {
 
     }
 
+    @RequestMapping(
+            value = "/deleteCourse",
+            produces = "application/json",
+            method = {RequestMethod.GET, RequestMethod.DELETE})
+    public RedirectView deleteCourse(Model m,@RequestParam Integer courseId,Principal principal){
+Courses courses=courseRepository.findById(courseId).get();
+        User user=userService.findByEmail(principal.getName());
+        List<Grade> grades=gradeRepository.findByCoursesId(courseId);
+        for (Grade g:grades)
+            gradeRepository.delete(g);
 
+        List<Tasks> tasks=taskRepository.findByCoursesId(courseId);
+        for (Tasks t:tasks)
+            taskRepository.delete(t);
+
+        courseRepository.delete(courses);
+        return new RedirectView("/dashBord/4rcc31"+groupsRepository.findByUsersId(user.getId()).getId()+"98de92c");
+    }
 
 
 }
